@@ -10,4 +10,4 @@ Technologies :
 3. Gradle
 4. MySql
 
-
+This is a private project
