@@ -17,6 +17,7 @@ public class PersonController {
 	public Person getPersonDetail(@RequestParam(value = "id",required = false,
 	                                                    defaultValue = "0") Integer id) {
 		Person p = personService.getPersonDetail(id);
+		System.out.println("This is in COntroller class");
 		return p;
 	}
 }

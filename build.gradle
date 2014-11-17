@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'war'
+
+repositories {
+	mavenCentral()
+//		ivy {
+//			// URL can refer to a local directory
+//			url "../local-repo"
+//		}
+}
+
+dependencies {
+	compile		'org.slf4j:slf4j-api:' + slfjVersion,
+				'org.slf4j:slf4j-log4j12:' + slfjVersion,
+				'log4j:log4j:' + logjVersion,
+				
+				'org.springframework.boot:spring-boot-starter-parent:1.1.1.RELEASE',
+				'com.googlecode.json-simple:json-simple:1.1.1',
+				'org.springframework:spring-core:' + springVersion, 
+				'org.springframework:spring-web:' + springVersion,
+				'org.springframework:spring-webmvc:'  + springVersion,
+				'org.springframework.boot:spring-boot-starter-web' ,
+		
+				'org.springframework:spring-context:'  + springVersion
+				
+
+testCompile		'junit:junit:4.11',
+				'org.testng:testng:6.8.7'
+}
