@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+version = '1.0'
+
+// Uses JDK 7
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+project.ext {
+	organization = 'www.kasun.com'
+	productName = 'SpringMVC'
+	moduleName = 'Undefined'
+	moduleType = 'Undefined'
+	deployDir = System.getenv()['deploy_in_tomcat'] + "/webapps"
+}
+
+// 1. Get dependencies from Maven local repository
+// 2. Get dependencies from Maven central repository
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+//Project dependencies
+dependencies {
+	compile 'ch.qos.logback:logback-classic:' + logbackVersion,
+			'org.springframework:spring-webmvc:' + springVersion,
+			'jstl:jstl:1.2'
+	//include in compile only, exclude in the war
+	providedCompile 'javax.servlet:servlet-api:2.5'
+}
+
+task deploy << {
+	
+		println "Cleaning tomcat webapps directory"
+		println "Deploy Dir is ${deployDir}"
+		ant.delete() {
+			fileset(dir: file("${deployDir}"), includes: createNamePrefix(project) + '*')
+		}
+		//ant.delete(dir: "${deployDir}/" + createNamePrefix(project) + '-userapp/')
+	
+		deployApp('userapp')
+	}
+
+def deployApp(appName) {
+	
+		println "Deploying " + appName
+		copy {
+			from '/build/libs'
+			into "${deployDir}"
+			//include '**/**'
+			 include '*.war'
+		}
+	}
+
+def createNamePrefix(project) {
+	return project.productName.toLowerCase()
+}
