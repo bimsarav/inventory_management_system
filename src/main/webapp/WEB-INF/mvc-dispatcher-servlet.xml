@@ -18,12 +18,16 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id = "inventoryService" class="com.kasun.userapp.inventory.service.InventoryService">
+	<bean id = "inventoryServiceImpl" class="com.kasun.userapp.inventory.service.InventoryServiceImpl">
 			<property name="addInventoryLogic" ref="addInventoryLogic"/>
 	</bean>			
 
 	<bean id = "addInventoryLogic" class="com.kasun.userapp.inventory.logic.AddInventoryLogic">
+			<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>	
+
+	<bean id = "inventoryDao" class="com.kasun.userapp.inventory.dao.InventoryDao">
+	</bean>			
 			
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />

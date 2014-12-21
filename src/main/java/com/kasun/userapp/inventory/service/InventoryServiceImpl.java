@@ -16,7 +16,7 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	@Override
 	public void addInventory(InventoryAddParam addParam) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kasun.userapp.inventory.dto;
 
 /**
@@ -39,5 +36,6 @@ public class InventoryAddParam {
 	public void setUserNote(String userNote) {
 		this.userNote = userNote;
 	}
+
 	
 }

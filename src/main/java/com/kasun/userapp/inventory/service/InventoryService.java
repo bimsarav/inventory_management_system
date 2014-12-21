@@ -7,7 +7,7 @@ import com.kasun.userapp.inventory.dto.InventoryAddParam;
  *
  * Dec 21, 2014
  */
-public interface InventoryService {
+public abstract interface InventoryService {
 	
 	void addInventory(InventoryAddParam addParam);
 	
