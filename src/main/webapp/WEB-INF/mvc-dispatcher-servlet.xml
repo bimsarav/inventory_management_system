@@ -12,24 +12,6 @@
 
 	<context:component-scan base-package="com.kasun" />
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<bean id = "inventoryServiceImpl" class="com.kasun.userapp.inventory.service.InventoryServiceImpl">
-			<property name="addInventoryLogic" ref="addInventoryLogic"/>
-	</bean>			
-
-	<bean id = "addInventoryLogic" class="com.kasun.userapp.inventory.logic.AddInventoryLogic">
-			<property name="inventoryDao" ref="inventoryDao"/>
-	</bean>	
-
-	<bean id = "inventoryDao" class="com.kasun.userapp.inventory.dao.InventoryDao">
-	</bean>			
-			
-
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<mvc:annotation-driven />

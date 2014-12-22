@@ -37,17 +37,17 @@ task deploy << {
 		println "Cleaning tomcat webapps directory"
 		println "Deploy Dir is ${deployDir}"
 		ant.delete() {
-			fileset(dir: file("${deployDir}"), includes: createNamePrefix(project) + '*')
-		}
-		//ant.delete(dir: "${deployDir}/" + createNamePrefix(project) + '-userapp/')
+			fileset(dir: file("${deployDir}/GradleSpringMVC-1.0"))
+		}//includes: createNamePrefix(project) 
+		ant.delete(dir: "${deployDir}/GradleSpringMVC-1.0")
 	
-		deployApp('userapp')
+		deployApp()
 	}
 
-def deployApp(appName) {
+def deployApp() {
 	
-		println "Deploying " + appName
-		copy {
+		println "Deploying " 
+		copy {				
 			from '/build/libs'
 			into "${deployDir}"
 			//include '**/**'

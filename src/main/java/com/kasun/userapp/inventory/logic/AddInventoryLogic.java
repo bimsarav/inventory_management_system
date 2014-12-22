@@ -1,5 +1,6 @@
 package com.kasun.userapp.inventory.logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.kasun.userapp.inventory.dao.InventoryDao;
@@ -12,7 +13,8 @@ import com.kasun.userapp.inventory.dto.InventoryAddParam;
  */
 
 public class AddInventoryLogic implements InventoryLogic {
-
+	
+	@Autowired
 	private InventoryDao inventoryDao;
 
 	public void saveInventory(InventoryAddParam addParam) {
@@ -30,7 +32,6 @@ public class AddInventoryLogic implements InventoryLogic {
 		return true;
 	}
 
-	@Required
 	public void setInventoryDao(InventoryDao inventoryDao) {
 		this.inventoryDao = inventoryDao;
 	}

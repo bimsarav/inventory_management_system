@@ -7,6 +7,7 @@ package com.kasun.userapp.inventory.dto;
  */
 public class InventoryAddParam {
 
+	private String inventoryId;
 	private String name;
 	private int price;
 	private String hospital;
@@ -36,6 +37,11 @@ public class InventoryAddParam {
 	public void setUserNote(String userNote) {
 		this.userNote = userNote;
 	}
-
+	public String getInventoryId() {
+		return inventoryId;
+	}
+	public void setInventoryId(String inventoryId) {
+		this.inventoryId = inventoryId;
+	}
 	
 }

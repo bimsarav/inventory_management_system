@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.service.InventoryService;
@@ -22,7 +24,7 @@ import com.kasun.userapp.inventory.service.InventoryService;
 @RequestMapping("/inventory")
 public class InventoryController {
 	
-	@Autowired 
+	
 	private InventoryService inventoryService;
 
 	private static final Logger log = LoggerFactory
@@ -45,6 +47,19 @@ public class InventoryController {
 		log.info("InventoryController test pass");
 		
 		return Boolean.TRUE;
+
+	}
+	
+	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
+	public ModelAndView welcome(@PathVariable("name") String name) {
+
+		log.debug("welcome() - name {}", name);
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("index");
+		model.addObject("name", name);
+
+		return model;
 
 	}
 
