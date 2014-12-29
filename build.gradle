@@ -2,8 +2,6 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 
-version = '1.0'
-
 // Uses JDK 7
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -27,6 +25,9 @@ repositories {
 dependencies {
 	compile 'ch.qos.logback:logback-classic:' + logbackVersion,
 			'org.springframework:spring-webmvc:' + springVersion,
+			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
+			'org.springframework:spring-jdbc:' + springJDBCVersion,
+			'org.springframework:spring-tx:4.0.7.RELEASE'
 			'jstl:jstl:1.2'
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
@@ -35,14 +36,25 @@ dependencies {
 task deploy << {
 	
 		println "Cleaning tomcat webapps directory"
-		println "Deploy Dir is ${deployDir}"
+	//	deleteWar()
 		ant.delete() {
-			fileset(dir: file("${deployDir}/GradleSpringMVC-1.0"))
+			fileset(dir: file("${deployDir}/GradleSpringMVC"))
 		}//includes: createNamePrefix(project) 
-		ant.delete(dir: "${deployDir}/GradleSpringMVC-1.0")
-	
+		ant.delete(dir: "${deployDir}/GradleSpringMVC")
+		println "Deleted web app"
+		
+		println "Deploy Dir is ${deployDir}"
 		deployApp()
 	}
+
+def deleteWar(){
+	FileTree tree = fileTree (dir: "${deployDir}/GradleSpringMVC.war");
+	tree.exclude "dont_delete.txt"
+	tree.each { File file ->
+		delete(file)
+	}
+	println "Deleted .war"
+}
 
 def deployApp() {
 	
@@ -51,8 +63,9 @@ def deployApp() {
 			from '/build/libs'
 			into "${deployDir}"
 			//include '**/**'
-			 include '*.war'
+			include '*.war'
 		}
+		println "Deployed "
 	}
 
 def createNamePrefix(project) {

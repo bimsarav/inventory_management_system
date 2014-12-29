@@ -3,6 +3,7 @@ package com.kasun.userapp.inventory.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,44 +25,68 @@ import com.kasun.userapp.inventory.service.InventoryService;
 @RequestMapping("/inventory")
 public class InventoryController {
 	
-	
+	@Autowired
 	private InventoryService inventoryService;
 
 	private static final Logger log = LoggerFactory
 			.getLogger(InventoryController.class);
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Boolean addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 		
 		log.info("addInventory");
 		validate(inventoryAddParam);
 		inventoryService.addInventory(inventoryAddParam);
 		
-		return Boolean.TRUE;
+		return "test";
 
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Boolean testInventory() {
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String testInventory() {
+		
+		InventoryAddParam inventoryAddParam = new InventoryAddParam();
+		
+		inventoryAddParam.setInventoryId("testId001");
+		inventoryAddParam.setName("testName");
+		inventoryAddParam.setPrice(1000);
+		inventoryAddParam.setUserNote("testNote");
+		inventoryAddParam.setHospital("testHospital");
+		
+		inventoryService.addInventory(inventoryAddParam);
 		
 		log.info("InventoryController test pass");
 		
-		return Boolean.TRUE;
+		return "test";
 
 	}
 	
-	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
-	public ModelAndView welcome(@PathVariable("name") String name) {
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String welcomePage() {
 
-		log.debug("welcome() - name {}", name);
+		log.debug("welcome");
+		
+//		ModelAndView model = new ModelAndView();
+//		model.setViewName("index");
+//		model.addObject("name", name);
 
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		model.addObject("name", name);
-
-		return model;
+		return "index";
 
 	}
+	
+	
+//	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
+//	public ModelAndView welcome(@PathVariable("name") String name) {
+//
+//		log.debug("welcome() - name {}", name);
+//
+//		ModelAndView model = new ModelAndView();
+//		model.setViewName("index");
+//		model.addObject("name", name);
+//
+//		return model;
+//
+//	}
 
 	private void validate(InventoryAddParam inventoryAddParam) {
 		// TODO Auto-generated method stub

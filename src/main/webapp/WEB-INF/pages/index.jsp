@@ -4,8 +4,35 @@
 <head>
 </head>
 
-<h1>Gradle - Spring MVC Hello World</h1>
-<h2>Hello ${name}</h2>
+<h1>Inventory Management System</h1>
+<h2>Hello User</h2>
+
+<body>
+
+<form action="inventory/add">
+
+	<br>
+	Inventory ID:
+	<input type="text" name="inventoryId">
+	<br>
+	Inventory Name:
+	<input type="text" name="Name">
+	<br>
+	Inventory Price:
+	<input type="text" name="Price">
+	<br>
+	Inventory ID:
+	<input type="text" name="hospital">
+	<br>
+	Inventory ID:
+	<input type="text" name="userNote">
+	<br>
+	
+	<input type="submit" value="Submit">
+
+</form>
+
+</body>
 
 </body>
 </html>

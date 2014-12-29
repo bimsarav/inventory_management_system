@@ -1,5 +1,9 @@
 package com.kasun.userapp.inventory.dao;
 
+import java.util.Set;
+
+import javax.sql.DataSource;
+
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 
 /**
@@ -8,9 +12,9 @@ import com.kasun.userapp.inventory.dto.InventoryAddParam;
  * Dec 21, 2014
  */
 public interface InventoryDao {
-	
+		
 	void saveInventory(InventoryAddParam addParam);
 	
-	InventoryAddParam getInventoryById(String inventoryId);
+	Set<InventoryAddParam> getInventoryById(String inventoryId);
 
 }

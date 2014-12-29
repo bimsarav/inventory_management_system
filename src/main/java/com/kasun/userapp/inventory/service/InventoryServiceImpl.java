@@ -1,5 +1,6 @@
 package com.kasun.userapp.inventory.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.kasun.userapp.inventory.dao.InventoryDao;
@@ -16,6 +17,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@SuppressWarnings("unused")
 	private AddInventoryLogic addInventoryLogic;
 	
+	@Autowired
 	private InventoryDao inventoryDao;
 	
 	@Override
@@ -36,7 +38,7 @@ public class InventoryServiceImpl implements InventoryService {
 		this.addInventoryLogic = addInventoryLogic;
 	}
 
-	@Required
+	//@Required
 	public void setInventoryDao(InventoryDao inventoryDao) {
 		this.inventoryDao = inventoryDao;
 	}
