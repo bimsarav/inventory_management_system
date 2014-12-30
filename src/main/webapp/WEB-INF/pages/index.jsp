@@ -21,10 +21,10 @@
 	Inventory Price:
 	<input type="text" name="Price">
 	<br>
-	Inventory ID:
+	Hospital name:
 	<input type="text" name="hospital">
 	<br>
-	Inventory ID:
+	Location:
 	<input type="text" name="userNote">
 	<br>
 	
