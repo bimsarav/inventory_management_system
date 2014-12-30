@@ -1,7 +1,6 @@
 package com.kasun.userapp.inventory.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 
 import com.kasun.userapp.inventory.dao.InventoryDao;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;

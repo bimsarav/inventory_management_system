@@ -2,7 +2,6 @@ package com.kasun.userapp.inventory.dao;
 
 import java.util.Set;
 
-import javax.sql.DataSource;
 
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 

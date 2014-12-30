@@ -27,8 +27,9 @@ dependencies {
 			'org.springframework:spring-webmvc:' + springVersion,
 			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
 			'org.springframework:spring-jdbc:' + springJDBCVersion,
-			'org.springframework:spring-tx:4.0.7.RELEASE'
+			'org.springframework:spring-tx:4.0.7.RELEASE',
 			'jstl:jstl:1.2'
+			
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 }
