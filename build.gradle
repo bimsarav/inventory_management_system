@@ -6,6 +6,10 @@ apply plugin: 'eclipse-wtp'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+war {
+	archiveName = projectName+'.war'
+	}
+
 project.ext {
 	organization = 'www.kasun.com'
 	productName = 'SpringMVC'
@@ -36,37 +40,27 @@ dependencies {
 
 task deploy << {
 	
-		println "Cleaning tomcat webapps directory"
-	//	deleteWar()
-		ant.delete() {
-			fileset(dir: file("${deployDir}/GradleSpringMVC"))
-		}//includes: createNamePrefix(project) 
-		ant.delete(dir: "${deployDir}/GradleSpringMVC")
-		println "Deleted web app"
-		
-		println "Deploy Dir is ${deployDir}"
+		deleteWar()
 		deployApp()
 	}
 
 def deleteWar(){
-	FileTree tree = fileTree (dir: "${deployDir}/GradleSpringMVC.war");
-	tree.exclude "dont_delete.txt"
-	tree.each { File file ->
-		delete(file)
-	}
-	println "Deleted .war"
+	
+	println "Cleaning tomcat webapps directory"
+	ant.delete() {
+			fileset(dir: file("${deployDir}/"))
+		}//includes: createNamePrefix(project) 
+		ant.delete(dir: "${deployDir}/"+projectName)
+	println ("Deleted "+projectName)
 }
 
 def deployApp() {
 	
-		println "Deploying " 
-		copy {				
-			from '/build/libs'
-			into "${deployDir}"
-			//include '**/**'
-			include '*.war'
-		}
-		println "Deployed "
+	copy {
+		from war // could be exploded or war itself
+		into "${deployDir}"
+	}
+		println "Coppied and Deployed "
 	}
 
 def createNamePrefix(project) {
