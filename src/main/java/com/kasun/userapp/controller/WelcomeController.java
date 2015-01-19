@@ -1,4 +1,4 @@
-package com.kasun.controller;
+package com.kasun.userapp.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,16 +13,10 @@ public class WelcomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
-	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
-	public ModelAndView welcome(@PathVariable("name") String name) {
-
-		logger.debug("welcome() - name {}", name);
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		model.addObject("name", name);
-
-		return model;
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String welcome() {
+		
+		return "index";
 
 	}
 

@@ -1,31 +1,32 @@
-package com.kasun.userapp.inventory.dto;
+package com.kasun.userapp.inventory.model;
 
-import java.io.Serializable;
+import java.util.Date;
 
-/**
- * @author Kasun Kariyawasam
- *
- * Dec 21, 2014
- */
-@SuppressWarnings("serial")
-public class InventoryAddParam implements Serializable {
-
+public class Inventory {
+	
 	private String inventoryId;
 	private String name;
-	private String price;
+	private int price;
 	private String hospital;
 	private String userNote;
+	private Date createdDate;
 	
+	public String getInventoryId() {
+		return inventoryId;
+	}
+	public void setInventoryId(String inventoryId) {
+		this.inventoryId = inventoryId;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getHospital() {
@@ -40,11 +41,11 @@ public class InventoryAddParam implements Serializable {
 	public void setUserNote(String userNote) {
 		this.userNote = userNote;
 	}
-	public String getInventoryId() {
-		return inventoryId;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setInventoryId(String inventoryId) {
-		this.inventoryId = inventoryId;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 	
 }

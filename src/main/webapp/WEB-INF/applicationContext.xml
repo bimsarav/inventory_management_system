@@ -12,10 +12,15 @@
 		<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>
 	
+	<bean id = "searchInventoryLogic" class="com.kasun.userapp.inventory.logic.SearchInventoryLogic">
+		<property name="inventoryDao" ref="inventoryDao"/>
+	</bean>
+	
 	<!-- Service -->
 	
 	<bean id = "inventoryService" class="com.kasun.userapp.inventory.service.InventoryServiceImpl">
 		<property name="addInventoryLogic" ref="addInventoryLogic"/>
+		<property name="searchInventoryLogic" ref="searchInventoryLogic"/>
 		<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>
 	
