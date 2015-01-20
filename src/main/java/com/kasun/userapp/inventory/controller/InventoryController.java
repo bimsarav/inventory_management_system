@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kasun.userapp.common.ServiceRequest;
 import com.kasun.userapp.common.ServiceResponse;
@@ -35,7 +36,7 @@ public class InventoryController {
 	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
+	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 		
 		log.info("addInventory");
 		

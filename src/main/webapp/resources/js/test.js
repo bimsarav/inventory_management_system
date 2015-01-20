@@ -15,6 +15,14 @@ function createAddParam() {
 	return inventoryAddParam;
 }
 
+function InventoryAddParam(){
+		this.inventoryId = "";
+		this.name = "";
+		this.price = "";
+		this.hospital = "";
+		this.userNote = "";
+}
+
 function doAdd(addParam) {
 	$.ajax({
 		type : "GET",
@@ -29,13 +37,26 @@ function doAdd(addParam) {
 	});
 }
 
+function populateTestObject(){
+	
+	var addParam = new InventoryAddParam();
+	addParam.inventoryId = "INV001";
+	addParam.name = "ECG MACHINE";
+	addParam.price = "1000";
+	addParam.hospital = "Colombo";
+	addParam.userNote = "User Note";
+	
+	
+	return addParam;
+}
+
 function sendDataTest() {
-	var addParam = createAddParam();
+	
 	$.ajax({
 		url : "/GradleSpringMVC/inventory/add",
 		type : 'GET',
 		dataType : 'json',
-		data : JSON.stringify($.extend(addParam)),
+		data : JSON.stringify(populateTestObject()),
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {

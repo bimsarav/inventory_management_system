@@ -57,7 +57,7 @@
 	<button id="btnAdd">Add Inventory</button>
 	</td>
 	</tr>
-<table>
+</table>
 </form>
 
 <button type="button"

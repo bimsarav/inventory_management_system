@@ -3,10 +3,8 @@ package com.kasun.userapp.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class WelcomeController {
@@ -16,6 +14,7 @@ public class WelcomeController {
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String welcome() {
 		
+		logger.info("Test Controller");
 		return "index";
 
 	}
