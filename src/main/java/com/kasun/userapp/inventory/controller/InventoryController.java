@@ -35,16 +35,13 @@ public class InventoryController {
 
 	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 		
 		log.info("addInventory");
-		
 		ServiceRequest<InventoryAddParam> serviceRequest = 	convertAddParamtoServiceRequest(inventoryAddParam);
-		
 		validate(inventoryAddParam);
 		inventoryService.addInventory(serviceRequest);
-		
 		return "Inventory Added Succesfully";
 
 	}

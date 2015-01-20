@@ -54,7 +54,7 @@ function sendDataTest() {
 	
 	$.ajax({
 		url : "/GradleSpringMVC/inventory/add",
-		type : 'GET',
+		type : 'POST',
 		dataType : 'json',
 		data : JSON.stringify(populateTestObject()),
 		contentType : 'application/json',

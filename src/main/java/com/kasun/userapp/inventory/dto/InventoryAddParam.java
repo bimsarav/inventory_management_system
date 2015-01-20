@@ -2,18 +2,25 @@ package com.kasun.userapp.inventory.dto;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+
 /**
  * @author Kasun Kariyawasam
  *
  * Dec 21, 2014
  */
-@SuppressWarnings("serial")
-public class InventoryAddParam implements Serializable {
 
-	private String inventoryId;
-	private String name;
-	private String price;
+@SuppressWarnings("serial")
+public class InventoryAddParam implements Serializable{
+
 	private String hospital;
+	
+	private String inventoryId;
+	
+	private String name;
+	
+	private String price;
+	
 	private String userNote;
 	
 	public String getName() {
