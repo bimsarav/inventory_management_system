@@ -63,12 +63,12 @@ public class InventoryController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/viewAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewAll", method = RequestMethod.POST)
 	public @ResponseBody List<Inventory> viewInventory(@RequestBody Tenant tanent) {
 
 		List<Inventory> inventories = new ArrayList<>();
-		ServiceResponse<List<Inventory>> response = new ServiceResponse<List<Inventory>>();
-		response = inventoryService.getAllInventories();
+		ServiceRequest<Tenant> serviceRequest = new ServiceRequest<>(tanent);
+		ServiceResponse<List<Inventory>> response = inventoryService.viewAllInventories(serviceRequest);
 		inventories = response.getPayload();
 		log.info("Inventory view all pass");
 		return inventories;

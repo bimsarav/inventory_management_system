@@ -2,28 +2,28 @@ $(document).ready(function() {
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
 	// $("#btnClear").click(doClearAll);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
-	//viewAllInventory();
+	viewAllInventory();
 });
 
-function InventoryAddParam(){
-		this.inventoryId = "";
-		this.name = "";
-		this.price = "";
-		this.hospital = "";
-		this.userNote = "";
+function InventoryAddParam() {
+	this.inventoryId = "";
+	this.name = "";
+	this.price = "";
+	this.hospital = "";
+	this.userNote = "";
 }
 
-function Tenant(){
+function Tenant() {
 	this.tenantId = "";
 }
 
-function populateViewAllParam(){
+function populateViewAllParam() {
 	var viewAll = new Tenant();
 	viewAll.tenantId = "SRI";
 	return viewAll;
 }
 
-function populateObject(){
+function populateObject() {
 	var addParam = new InventoryAddParam();
 	addParam.inventoryId = $("#inventoryId").val();
 	addParam.name = $("#name").val();
@@ -33,7 +33,7 @@ function populateObject(){
 	return addParam;
 }
 
-function viewAllInventory(){
+function viewAllInventory() {
 	$.ajax({
 		url : "/GradleSpringMVC/inventory/viewAll",
 		type : 'POST',
@@ -41,12 +41,18 @@ function viewAllInventory(){
 		data : JSON.stringify(populateViewAllParam()),
 		contentType : 'application/json',
 		mimeType : 'application/json'
-	}).done(function(response) {
-		var trHTML = '';
-        $.each(response, function (i, item) {
-            trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
-        }
-	)}).fail(function(error) {
+	}).done(
+			function(response) {
+				var trHTML = '';
+				$.each(response, function(i, item) {
+					trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
+							+ item.name + '</td><td>' + item.price
+							+ '</td><td>' + item.hospital + '</td><td>'
+							+ item.userNote + '</td><td>' + item.createdDate
+							+ '</td></tr>';
+				});
+				$('#inventoryTable').append(trHTML);
+			}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()
@@ -64,7 +70,6 @@ function doAdd() {
 	}).done(function(data) {
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
-		alert(error);
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()

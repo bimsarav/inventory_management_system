@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.kasun.userapp.common.Void;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
+import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.model.Inventory;
 
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public class InventoryJDBCDao implements InventoryDao {
 	}
 
 	@Override
-	public List<Inventory> viewAll() {
+	public List<Inventory> viewAll(Tenant tenant) {
 		
 		List<Inventory> searchResults = new ArrayList<>();
 		String sql =  "SELECT * FROM inventoryData ";
@@ -107,5 +108,4 @@ public class InventoryJDBCDao implements InventoryDao {
 		}		
 		return searchResults;
 	}
-	
 }

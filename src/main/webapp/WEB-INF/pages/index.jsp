@@ -39,17 +39,16 @@
 				<td>
 					<button id="btnAdd">Add Inventory</button>
 				</td>
+				<td>
+					<button id="btnClear">Clear</button>
+				</td>
 			</tr>
 		</table>
 	</form>
 
-	<button type="button"
-		onclick="document.getElementById('demo').innerHTML = Date()">
-		Date and Time.</button>
 	<div>
 		<table id="inventoryTable"  border="1" cellpadding="2">
    	 		<tr>
-        		<td>&nbsp;</td>
         		<td><b>Inventory ID</b></td>
         		<td><b>Inventory Name</b></td>
         		<td><b>Inventory Price</b></td>
@@ -59,7 +58,6 @@
     		</tr>
 		</table>
 	</div>
-	<button id="btnClear">Clear</button>
 
 	<p id="demo"></p>
 

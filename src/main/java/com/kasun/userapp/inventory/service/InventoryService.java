@@ -6,6 +6,7 @@ import com.kasun.userapp.common.ServiceRequest;
 import com.kasun.userapp.common.ServiceResponse;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
+import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.model.Inventory;
 
 /**
@@ -20,7 +21,7 @@ public abstract interface InventoryService {
 	
 	Void editInventory(InventoryAddParam editParam);
 	
-	ServiceResponse<List<Inventory>> getAllInventories();
+	ServiceResponse<List<Inventory>> viewAllInventories(ServiceRequest<Tenant> tenant);
 	
 	ServiceResponse<List<Inventory>> searchInventory(ServiceRequest<InventorySearchCriteria> serchRequest);
 	

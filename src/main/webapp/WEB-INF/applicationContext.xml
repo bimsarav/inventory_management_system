@@ -8,6 +8,10 @@
 	
 	<!-- Logic -->
 	
+	<bean id = "viewAllInventoriesLogic" class="com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic">
+		<property name="inventoryDao" ref="inventoryDao"/>
+	</bean>
+	
 	<bean id = "addInventoryLogic" class="com.kasun.userapp.inventory.logic.AddInventoryLogic">
 		<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>
@@ -21,7 +25,7 @@
 	<bean id = "inventoryService" class="com.kasun.userapp.inventory.service.InventoryServiceImpl">
 		<property name="addInventoryLogic" ref="addInventoryLogic"/>
 		<property name="searchInventoryLogic" ref="searchInventoryLogic"/>
-		<property name="inventoryDao" ref="inventoryDao"/>
+		<property name="viewAllInventoriesLogic" ref="viewAllInventoriesLogic"/>
 	</bean>
 	
 	<!-- Dao -->
@@ -29,7 +33,7 @@
 	<bean id = "inventoryDao" class="com.kasun.userapp.inventory.dao.InventoryJDBCDao">
 		<property name="dataSource"  ref="dataSource" />
 	</bean>
-		
+	
 	<!-- Data Source -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

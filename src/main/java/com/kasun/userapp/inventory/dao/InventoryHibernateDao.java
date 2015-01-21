@@ -6,6 +6,7 @@ import java.util.Set;
 import com.kasun.userapp.common.Void;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
+import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.model.Inventory;
 
 public class InventoryHibernateDao implements InventoryDao {
@@ -29,7 +30,7 @@ public class InventoryHibernateDao implements InventoryDao {
 	}
 
 	@Override
-	public List<Inventory> viewAll() {
+	public List<Inventory> viewAll(Tenant tenant) {
 		// TODO Auto-generated method stub
 		return null;
 	}

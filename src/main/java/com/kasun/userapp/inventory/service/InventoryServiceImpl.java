@@ -11,8 +11,11 @@ import com.kasun.userapp.common.ServiceResponseAssembler;
 import com.kasun.userapp.inventory.dao.InventoryDao;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
+import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.logic.AddInventoryLogic;
 import com.kasun.userapp.inventory.logic.SearchInventoryLogic;
+import com.kasun.userapp.inventory.logic.GetAllInventories;
+import com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic;
 import com.kasun.userapp.inventory.model.Inventory;
 
 /**
@@ -26,10 +29,7 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	private SearchInventoryLogic searchInventoryLogic;
 	
-	
-
-	@Autowired
-	private InventoryDao inventoryDao;
+	private ViewAllInventoriesLogic viewAllInventoriesLogic;
 	
 	@Override
 	public ServiceResponse<List<Inventory>> searchInventory(ServiceRequest<InventorySearchCriteria> serchRequest) {
@@ -49,22 +49,26 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public ServiceResponse<List<Inventory>> getAllInventories() {
-		return ServiceResponseAssembler.assemble(searchInventoryLogic,null);
+	public ServiceResponse<List<Inventory>> viewAllInventories(ServiceRequest<Tenant> tenant) {
+		
+		return ServiceResponseAssembler.assemble(viewAllInventoriesLogic, tenant);
 	}
 	
 	@Required
 	public void setAddInventoryLogic(AddInventoryLogic addInventoryLogic) {
+		
 		this.addInventoryLogic = addInventoryLogic;
 	}
 
 	@Required
 	public void setSearchInventoryLogic(SearchInventoryLogic searchInventoryLogic) {
+		
 		this.searchInventoryLogic = searchInventoryLogic;
 	}
-
-	public void setInventoryDao(InventoryDao inventoryDao) {
-		this.inventoryDao = inventoryDao;
+	
+	@Required
+	public void setViewAllInventoriesLogic(ViewAllInventoriesLogic viewAllInventoriesLogic) {
+		
+		this.viewAllInventoriesLogic = viewAllInventoriesLogic;
 	}
-
 }
