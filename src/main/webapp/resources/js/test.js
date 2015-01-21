@@ -45,8 +45,6 @@ function populateTestObject(){
 	addParam.price = "1000";
 	addParam.hospital = "Colombo";
 	addParam.userNote = "User Note";
-	
-	
 	return addParam;
 }
 

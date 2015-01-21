@@ -38,7 +38,7 @@ public class InventoryController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 		
-		log.info("addInventory");
+		System.out.println("Success "+inventoryAddParam.getName());
 		ServiceRequest<InventoryAddParam> serviceRequest = 	convertAddParamtoServiceRequest(inventoryAddParam);
 		validate(inventoryAddParam);
 		inventoryService.addInventory(serviceRequest);
