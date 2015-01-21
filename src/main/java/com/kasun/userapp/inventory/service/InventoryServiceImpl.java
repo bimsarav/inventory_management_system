@@ -14,7 +14,6 @@ import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
 import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.logic.AddInventoryLogic;
 import com.kasun.userapp.inventory.logic.SearchInventoryLogic;
-import com.kasun.userapp.inventory.logic.GetAllInventories;
 import com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic;
 import com.kasun.userapp.inventory.model.Inventory;
 
