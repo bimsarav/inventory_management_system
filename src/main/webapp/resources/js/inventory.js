@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
 	// $("#btnClear").click(doClearAll);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
-	viewAllInventory();
+	//viewAllInventory();
 });
 
 function InventoryAddParam(){
