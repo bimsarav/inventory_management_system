@@ -1,19 +1,8 @@
 $(document).ready(function() {
-	$("#btnAdd").click(sendDataTest());
-	$("#btnClear").click(doClearAll);
-
+	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
+	// $("#btnClear").click(doClearAll);
+	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
 });
-
-function createAddParam() {
-	var inventoryAddParam = {
-		"inventoryId" : "ABC123",
-		"name" : "ECG Machine",
-		"price" : "100",
-		"hospital" : "Kandy",
-		"userNote" : "User Note"
-	};
-	return inventoryAddParam;
-}
 
 function InventoryAddParam(){
 		this.inventoryId = "";
@@ -23,43 +12,29 @@ function InventoryAddParam(){
 		this.userNote = "";
 }
 
-function doAdd(addParam) {
-	$.ajax({
-		type : "GET",
-		url : "/GradleSpringMVC/inventory/add",
-		data : addParam,
-		success : function(response) {
-			alert('Succes msg: ' + response);
-		},
-		error : function(e) {
-			alert('Error msg: ' + e);
-		}
-	});
-}
-
-function populateTestObject(){
-	
+function populateObject(){
 	var addParam = new InventoryAddParam();
-	addParam.inventoryId = "INV001";
-	addParam.name = "ECG MACHINE";
-	addParam.price = "1000";
-	addParam.hospital = "Colombo";
-	addParam.userNote = "User Note";
+	addParam.inventoryId = $("#inventoryId").val();
+	addParam.name = $("#name").val();
+	addParam.price = $("#price").val();
+	addParam.hospital = $("#hospital").val();
+	addParam.userNote = $("#userNote").val();
 	return addParam;
 }
 
-function sendDataTest() {
-	
+function doAdd() {
 	$.ajax({
 		url : "/GradleSpringMVC/inventory/add",
 		type : 'POST',
 		dataType : 'json',
-		data : JSON.stringify(populateTestObject()),
+		data : JSON.stringify(populateObject()),
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
+		alert(data);
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
+		alert(error);
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()
@@ -67,6 +42,9 @@ function sendDataTest() {
 }
 
 function doClearAll() {
-	$("#inventoryId").val("Done");
-	$("#name").val("ERP");
+	$("#inventoryId").val("");
+	$("#name").val("");
+	$("#price").val("");
+	$("#hospital").val("");
+	$("#userNote").val("");
 }
