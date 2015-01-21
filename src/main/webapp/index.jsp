@@ -13,15 +13,16 @@
 
 <body>
 
-<form role="form" action="/GradleSpringMVC/inventory/welcome" method="GET">
-	<input type="submit" name="inventory" value="Add Inventory">
-</form>
+	<form role="form" action="/GradleSpringMVC/inventory/welcome"
+		method="GET">
+		<input type="submit" name="inventory" value="Add Inventory">
+	</form>
 
-<button type="button"
-onclick="document.getElementById('demo').innerHTML = Date()">
-Date and Time.</button>
+	<button type="button"
+		onclick="document.getElementById('demo').innerHTML = Date()">
+		Date and Time.</button>
 
-<p id="demo"></p>
+	<p id="demo"></p>
 
 </body>
 

@@ -2,8 +2,6 @@ package com.kasun.userapp.inventory.dto;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-
 /**
  * @author Kasun Kariyawasam
  *

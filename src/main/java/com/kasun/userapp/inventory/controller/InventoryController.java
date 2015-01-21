@@ -29,86 +29,60 @@ import com.kasun.userapp.inventory.service.InventoryService;
 @Controller
 @RequestMapping("/inventory")
 public class InventoryController {
-	
+
 	@Autowired
 	private InventoryService inventoryService;
 
-	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(InventoryController.class);
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
-		
-		System.out.println("Success "+inventoryAddParam.getName());
-		ServiceRequest<InventoryAddParam> serviceRequest = 	convertAddParamtoServiceRequest(inventoryAddParam);
+	public @ResponseBody String addInventory(
+			@RequestBody InventoryAddParam inventoryAddParam) {
+
 		validate(inventoryAddParam);
+		System.out.println("Success " + inventoryAddParam.getName());
+		ServiceRequest<InventoryAddParam> serviceRequest = convertAddParamtoServiceRequest(inventoryAddParam);
 		inventoryService.addInventory(serviceRequest);
 		return "Inventory Added Succesfully";
-
 	}
-	
+
 	private ServiceRequest<InventoryAddParam> convertAddParamtoServiceRequest(
 			InventoryAddParam inventoryAddParam) {
-		
+
 		ServiceRequest<InventoryAddParam> request = new ServiceRequest<InventoryAddParam>();
 		request.setPayload(inventoryAddParam);
-		
 		return request;
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void testInventory() {
-		
-		InventoryAddParam addParam = new InventoryAddParam();
-		
-		addParam.setInventoryId("abc123");
-		addParam.setName("ECHO Machine");
-		addParam.setPrice("25000");
-		addParam.setUserNote("User Note");
-		addParam.setHospital("Badulla Hospital");
-		
-		ServiceRequest<InventoryAddParam> serviceRequest = 	convertAddParamtoServiceRequest(addParam);
-		
-		validate(addParam);
-		inventoryService.addInventory(serviceRequest);
-		
-		log.info("InventoryController test pass");
-		
-	}
-	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String welcomePage() {
 
 		log.debug("welcome");
-		
 		return "index";
-
 	}
-	
+
 	@RequestMapping(value = "/viewAll", method = RequestMethod.GET)
 	public List<Inventory> viewInventory() {
-		
+
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceResponse<List<Inventory>> response = new ServiceResponse<List<Inventory>>();
 		response = inventoryService.getAllInventories();
 		inventories = response.getPayload();
-		
 		log.info("Inventory view all pass");
-		
 		return inventories;
 
 	}
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public List<Inventory> searchInventory(@RequestBody InventorySearchCriteria searchCriteria) {
-				
+	public List<Inventory> searchInventory(
+			@RequestBody InventorySearchCriteria searchCriteria) {
+
 		ServiceRequest<InventorySearchCriteria> serchRequest = new ServiceRequest<InventorySearchCriteria>();
 		serchRequest.setPayload(searchCriteria);
-		
 		ServiceResponse<List<Inventory>> response = new ServiceResponse<List<Inventory>>();
 		response = inventoryService.searchInventory(serchRequest);
-		
 		validateSearchResulit(response);
-		
 		log.info("Inventory search all pass");
 		return response.getPayload();
 
@@ -116,14 +90,20 @@ public class InventoryController {
 
 	private void validateSearchResulit(ServiceResponse<List<Inventory>> response) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void validate(InventoryAddParam inventoryAddParam) {
-		// TODO Auto-generated method stub
+
+		if (inventoryAddParam == null) {
+			throw new RuntimeException("Add param can not be null");
+		}
 		
+		if (inventoryAddParam.getInventoryId() == null || inventoryAddParam.getInventoryId().isEmpty()) {
+			throw new RuntimeException("Inventory id can not be null");
+		}
 	}
-   
+
 	public void setInventoryService(InventoryService inventoryService) {
 		this.inventoryService = inventoryService;
 	}
