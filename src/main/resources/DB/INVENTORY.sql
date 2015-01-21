@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE DATABASE INVENTORY;
 
+USE INVENTORY;
+
 --
 -- Table structure for table `inventoryData`
 --
