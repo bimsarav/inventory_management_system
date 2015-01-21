@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
 	// $("#btnClear").click(doClearAll);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
+	viewAllInventory();
 });
 
 function InventoryAddParam(){
@@ -10,6 +11,16 @@ function InventoryAddParam(){
 		this.price = "";
 		this.hospital = "";
 		this.userNote = "";
+}
+
+function Tenant(){
+	this.tenantId = "";
+}
+
+function populateViewAllParam(){
+	var viewAll = new Tenant();
+	viewAll.tenantId = "SRI";
+	return viewAll;
 }
 
 function populateObject(){
@@ -22,6 +33,26 @@ function populateObject(){
 	return addParam;
 }
 
+function viewAllInventory(){
+	$.ajax({
+		url : "/GradleSpringMVC/inventory/viewAll",
+		type : 'POST',
+		dataType : 'json',
+		data : JSON.stringify(populateViewAllParam()),
+		contentType : 'application/json',
+		mimeType : 'application/json'
+	}).done(function(response) {
+		var trHTML = '';
+        $.each(response, function (i, item) {
+            trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+        }
+	)}).fail(function(error) {
+		// parseToPageAlerts(error.responseText);
+	}).always(function() {
+		// hideLoading()
+	});
+}
+
 function doAdd() {
 	$.ajax({
 		url : "/GradleSpringMVC/inventory/add",
@@ -31,7 +62,6 @@ function doAdd() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
-		alert(data);
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
 		alert(error);

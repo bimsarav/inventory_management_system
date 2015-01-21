@@ -37,9 +37,7 @@ public class InventoryJDBCDao implements InventoryDao {
 	public Void saveInventory(InventoryAddParam addParam) {
 
 		String sql = "INSERT INTO inventoryData VALUES (?, ?, ?, ?,?,?)";
-		jdbcTemplateObject.update(sql, addParam.getInventoryId(),
-				addParam.getName(),  Integer.parseInt(addParam.getPrice()),
-				addParam.getHospital(), addParam.getUserNote(), new Date());
+		jdbcTemplateObject.update(sql, addParam.getInventoryId(), addParam.getName(),  Integer.parseInt(addParam.getPrice()), addParam.getHospital(), addParam.getUserNote(), new Date());
 
 		log.info("Inventory Saved Succesfully");
 		return new Void();

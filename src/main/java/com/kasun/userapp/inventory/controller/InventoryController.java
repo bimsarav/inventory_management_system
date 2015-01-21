@@ -17,6 +17,7 @@ import com.kasun.userapp.common.ServiceRequest;
 import com.kasun.userapp.common.ServiceResponse;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
+import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.model.Inventory;
 import com.kasun.userapp.inventory.service.InventoryService;
 
@@ -63,7 +64,7 @@ public class InventoryController {
 	}
 
 	@RequestMapping(value = "/viewAll", method = RequestMethod.GET)
-	public List<Inventory> viewInventory() {
+	public @ResponseBody List<Inventory> viewInventory(@RequestBody Tenant tanent) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceResponse<List<Inventory>> response = new ServiceResponse<List<Inventory>>();

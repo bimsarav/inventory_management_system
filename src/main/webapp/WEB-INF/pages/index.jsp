@@ -47,6 +47,12 @@
 		onclick="document.getElementById('demo').innerHTML = Date()">
 		Date and Time.</button>
 
+	<div id="gridContainer" class="col-sm-12 text-center"
+		style="padding: 10px 10px">
+		<table id="jqInventory"></table>
+		<div id="jqInventoryPager"></div>
+	</div>
+
 	<button id="btnClear">Clear</button>
 
 	<p id="demo"></p>
