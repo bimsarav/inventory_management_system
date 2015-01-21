@@ -2,13 +2,11 @@ package com.kasun.userapp.inventory.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.kasun.userapp.common.ServiceRequest;
 import com.kasun.userapp.common.ServiceResponse;
 import com.kasun.userapp.common.ServiceResponseAssembler;
-import com.kasun.userapp.inventory.dao.InventoryDao;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
 import com.kasun.userapp.inventory.dto.Tenant;
