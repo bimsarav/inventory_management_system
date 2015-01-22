@@ -38,8 +38,7 @@ public class InventoryController {
 			.getLogger(InventoryController.class);
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody String addInventory(
-			@RequestBody InventoryAddParam inventoryAddParam) {
+	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 
 		validate(inventoryAddParam);
 		System.out.println("Success " + inventoryAddParam.getName());
@@ -55,11 +54,11 @@ public class InventoryController {
 		request.setPayload(inventoryAddParam);
 		return request;
 	}
-	
+
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String welcomePageTemp() {
 		log.debug("welcome");
-		return "index";
+		return "inventory";
 	}
 
 	@RequestMapping(value = "/inv", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -79,17 +78,17 @@ public class InventoryController {
 		return inventories;
 	}
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public List<Inventory> searchInventory(
-			@RequestBody InventorySearchCriteria searchCriteria) {
+	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody List<Inventory> searchInventory(@RequestBody InventorySearchCriteria searchCriteria) {
 
+		List<Inventory> inventories = new ArrayList<>();
 		ServiceRequest<InventorySearchCriteria> serchRequest = new ServiceRequest<InventorySearchCriteria>();
 		serchRequest.setPayload(searchCriteria);
-		ServiceResponse<List<Inventory>> response = new ServiceResponse<List<Inventory>>();
-		response = inventoryService.searchInventory(serchRequest);
+		ServiceResponse<List<Inventory>> response = inventoryService.searchInventory(serchRequest);
 		validateSearchResulit(response);
 		log.info("Inventory search all pass");
-		return response.getPayload();
+		inventories = response.getPayload();
+		return inventories;
 	}
 
 	private void validateSearchResulit(ServiceResponse<List<Inventory>> response) {
@@ -102,8 +101,9 @@ public class InventoryController {
 		if (inventoryAddParam == null) {
 			throw new RuntimeException("Add param can not be null");
 		}
-		
-		if (inventoryAddParam.getInventoryId() == null || inventoryAddParam.getInventoryId().isEmpty()) {
+
+		if (inventoryAddParam.getInventoryId() == null
+				|| inventoryAddParam.getInventoryId().isEmpty()) {
 			throw new RuntimeException("Inventory id can not be null");
 		}
 	}

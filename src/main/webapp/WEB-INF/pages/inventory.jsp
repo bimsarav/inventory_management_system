@@ -32,11 +32,18 @@
 				<td><input id="userNote"></td>
 			</tr>
 			<tr>
+			</tr>
+		</table>
+		<table>
+			<tr>
 				<td>
 					<button id="btnAdd">Add Inventory</button>
 				</td>
 				<td>
 					<button id="btnClear">Clear</button>
+				</td>
+				<td>
+					<button id="btnSearch">Search</button>
 				</td>
 			</tr>
 		</table>
@@ -57,9 +64,10 @@
 
 	<p id="demo"></p>
 
-<script src="<c:url value="/resources/core/jquery.min.js" />"></script>
-<script src="<c:url value="/resources/js/inventory.js" />"></script>
-<link href="<c:url value="/resources/core/main.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/core/jquery.min.js" />"></script>
+	<script src="<c:url value="/resources/js/inventory.js" />"></script>
+	<link href="<c:url value="/resources/core/main.css" />"
+		rel="stylesheet">
 
 </body>
 </html>

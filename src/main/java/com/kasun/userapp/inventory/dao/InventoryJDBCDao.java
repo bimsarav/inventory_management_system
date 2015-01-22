@@ -38,34 +38,39 @@ public class InventoryJDBCDao implements InventoryDao {
 	public Void saveInventory(InventoryAddParam addParam) {
 
 		String sql = "INSERT INTO inventoryData VALUES (?, ?, ?, ?,?,?)";
-		jdbcTemplateObject.update(sql, addParam.getInventoryId(), addParam.getName(),  Integer.parseInt(addParam.getPrice()), addParam.getHospital(), addParam.getUserNote(), new Date());
+		jdbcTemplateObject.update(sql, addParam.getInventoryId(),
+				addParam.getName(), Integer.parseInt(addParam.getPrice()),
+				addParam.getHospital(), addParam.getUserNote(), new Date());
 
 		log.info("Inventory Saved Succesfully");
 		return new Void();
-		
+
 	}
-	
+
 	@Override
 	public List<Inventory> search(InventorySearchCriteria searchCriteria) {
-		
+
 		List<Inventory> searchResults = new ArrayList<>();
-		String sql =  "SELECT * FROM inventoryData WHERE Inventory_Id = ?";
-		
-		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql,searchCriteria.getInventoryId());
-		
-		for (@SuppressWarnings("rawtypes") Map row : rows) {
-			
+		String sql = "SELECT * FROM inventoryData WHERE Inventory_Id = ? AND Name = ? AND Price = ? AND Hospital = ?";
+
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql,
+				searchCriteria.getInventoryId(),
+				searchCriteria.getInventoryName(), 
+				searchCriteria.getPrice(),
+				searchCriteria.getHospital());
+
+		for (@SuppressWarnings("rawtypes")
+		Map row : rows) {
 			Inventory inventory = new Inventory();
-			inventory.setInventoryId((String)(row.get("Inventory_Id")));
-			inventory.setName((String)(row.get("Name")));
-			inventory.setPrice((Integer)(row.get("Price")));
-			inventory.setHospital((String)(row.get("Hospital")));
-			inventory.setUserNote((String)(row.get("User_Note")));
-			inventory.setCreatedDate((Date)(row.get("Created_Date")));
-			
+			inventory.setInventoryId((String) (row.get("Inventory_Id")));
+			inventory.setName((String) (row.get("Name")));
+			inventory.setPrice((Integer) (row.get("Price")));
+			inventory.setHospital((String) (row.get("Hospital")));
+			inventory.setUserNote((String) (row.get("User_Note")));
+			inventory.setCreatedDate((Date) (row.get("Created_Date")));
+
 			searchResults.add(inventory);
-			
-		}		
+		}
 		return searchResults;
 	}
 
@@ -80,32 +85,33 @@ public class InventoryJDBCDao implements InventoryDao {
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-	
-	private JdbcTemplate getJdbcTemplate(){
+
+	private JdbcTemplate getJdbcTemplate() {
 		return this.jdbcTemplateObject;
 	}
 
 	@Override
 	public List<Inventory> viewAll(Tenant tenant) {
-		
+
 		List<Inventory> searchResults = new ArrayList<>();
-		String sql =  "SELECT * FROM inventoryData ";
-		
+		String sql = "SELECT * FROM inventoryData ";
+
 		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
-		
-		for (@SuppressWarnings("rawtypes") Map row : rows) {
-			
+
+		for (@SuppressWarnings("rawtypes")
+		Map row : rows) {
+
 			Inventory inventory = new Inventory();
-			inventory.setInventoryId((String)(row.get("Inventory_Id")));
-			inventory.setName((String)(row.get("Name")));
-			inventory.setPrice((Integer)(row.get("Price")));
-			inventory.setHospital((String)(row.get("Hospital")));
-			inventory.setUserNote((String)(row.get("User_Note")));
-			inventory.setCreatedDate((Date)(row.get("Created_Date")));
-			
+			inventory.setInventoryId((String) (row.get("Inventory_Id")));
+			inventory.setName((String) (row.get("Name")));
+			inventory.setPrice((Integer) (row.get("Price")));
+			inventory.setHospital((String) (row.get("Hospital")));
+			inventory.setUserNote((String) (row.get("User_Note")));
+			inventory.setCreatedDate((Date) (row.get("Created_Date")));
+
 			searchResults.add(inventory);
-			
-		}		
+
+		}
 		return searchResults;
 	}
 }
