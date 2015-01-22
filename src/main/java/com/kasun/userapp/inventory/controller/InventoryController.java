@@ -55,10 +55,15 @@ public class InventoryController {
 		request.setPayload(inventoryAddParam);
 		return request;
 	}
-
+	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String welcomePage() {
+	public String welcomePageTemp() {
+		log.debug("welcome");
+		return "index";
+	}
 
+	@RequestMapping(value = "/inv", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public String welcomePage(@RequestBody Tenant tanent) {
 		log.debug("welcome");
 		return "index";
 	}
@@ -72,7 +77,6 @@ public class InventoryController {
 		inventories = response.getPayload();
 		log.info("Inventory view all pass");
 		return inventories;
-
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -86,7 +90,6 @@ public class InventoryController {
 		validateSearchResulit(response);
 		log.info("Inventory search all pass");
 		return response.getPayload();
-
 	}
 
 	private void validateSearchResulit(ServiceResponse<List<Inventory>> response) {

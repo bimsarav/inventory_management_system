@@ -3,10 +3,6 @@
 <html lang="en">
 <head>
 
-<script src="<c:url value="/resources/core/jquery.min.js" />"></script>
-<script src="<c:url value="/resources/js/inventory.js" />"></script>
-<link href="<c:url value="/resources/core/main.css" />" rel="stylesheet">
-
 </head>
 <title>IMS</title>
 <h1>Inventory Management System</h1>
@@ -47,21 +43,23 @@
 	</form>
 
 	<div>
-		<table id="inventoryTable"  border="1" cellpadding="2">
-   	 		<tr>
-        		<td><b>Inventory ID</b></td>
-        		<td><b>Inventory Name</b></td>
-        		<td><b>Inventory Price</b></td>
-        		<td><b>Hospital name</b></td>
-        		<td><b>User Note</b></td>
-        		<td><b>Created Date</b></td>
-    		</tr>
+		<table id="inventoryTable" border="1" cellpadding="2">
+			<tr>
+				<td><b>Inventory ID</b></td>
+				<td><b>Inventory Name</b></td>
+				<td><b>Inventory Price</b></td>
+				<td><b>Hospital name</b></td>
+				<td><b>User Note</b></td>
+				<td><b>Created Date</b></td>
+			</tr>
 		</table>
 	</div>
 
 	<p id="demo"></p>
 
-</body>
+<script src="<c:url value="/resources/core/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/js/inventory.js" />"></script>
+<link href="<c:url value="/resources/core/main.css" />" rel="stylesheet">
 
 </body>
 </html>

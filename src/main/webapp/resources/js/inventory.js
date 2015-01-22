@@ -68,6 +68,7 @@ function doAdd() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
+		viewAllInventory();
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
