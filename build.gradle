@@ -32,7 +32,7 @@ dependencies {
 			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
 			'org.springframework:spring-jdbc:' + springJDBCVersion,
 			'org.springframework:spring-tx:4.0.7.RELEASE',
-			'org.codehaus.jackson:jackson-mapper-asl:1.9.12',
+			'org.codehaus.jackson:jackson-mapper-asl:' + jacksonVersion,
 			'jstl:jstl:1.2'
 			
 	//include in compile only, exclude in the war

@@ -1,5 +1,6 @@
 package com.kasun.userapp.inventory.dao;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,13 +52,35 @@ public class InventoryJDBCDao implements InventoryDao {
 	public List<Inventory> search(InventorySearchCriteria searchCriteria) {
 
 		List<Inventory> searchResults = new ArrayList<>();
-		String sql = "SELECT * FROM inventoryData WHERE Inventory_Id = ? AND Name = ? AND Price = ? AND Hospital = ?";
+		String sql = "SELECT * FROM inventoryData";
+		
+		if(searchCriteria != null || isAllFieldsNotEmpty(searchCriteria)){
+			sql = sql +  " WHERE ";
+			
+			if(!searchCriteria.getInventoryId().isEmpty()){
+				sql = sql + "Inventory_Id = '"+searchCriteria.getInventoryId() +"' ";
+			}
+			
+			if(!searchCriteria.getInventoryName().isEmpty()){
+				sql = sql + "AND Name = '"+searchCriteria.getInventoryName() +"' ";
+			}
+			
+			if(!searchCriteria.getPrice().isEmpty()){
+				sql = sql +"AND Price = '"+searchCriteria.getPrice()+"' ";
+			}
+			
+			if(!searchCriteria.getHospital().isEmpty()){
+				sql = sql + "AND Hospital = '"+searchCriteria.getHospital() +"' ";
+			}
+		}
+		
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 
-		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql,
-				searchCriteria.getInventoryId(),
-				searchCriteria.getInventoryName(), 
-				searchCriteria.getPrice(),
-				searchCriteria.getHospital());
+//		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql,
+//				searchCriteria.getInventoryId(),
+//				searchCriteria.getInventoryName(), 
+//				searchCriteria.getPrice(),
+//				searchCriteria.getHospital());
 
 		for (@SuppressWarnings("rawtypes")
 		Map row : rows) {
@@ -74,9 +97,30 @@ public class InventoryJDBCDao implements InventoryDao {
 		return searchResults;
 	}
 
+	private boolean isAllFieldsNotEmpty(Object obj) {
+		
+		for (Field field : obj.getClass().getDeclaredFields()) {
+	        if (!field.isAccessible()) {
+	            field.setAccessible(true);
+	        }
+	        
+	        // Danger!
+	        String str;
+			try {
+				str = (String) field.get(obj);
+				if (!str.isEmpty()) {
+		            return true;
+		        }
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    return false;
+	}
+
 	@Override
 	public Set<InventoryAddParam> getInventoryById(String inventoryId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
