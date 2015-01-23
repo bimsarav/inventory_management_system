@@ -11,6 +11,7 @@ import com.kasun.userapp.inventory.dto.InventoryAddParam;
 import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
 import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.logic.AddInventoryLogic;
+import com.kasun.userapp.inventory.logic.DeleteInventoryLogic;
 import com.kasun.userapp.inventory.logic.SearchInventoryLogic;
 import com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic;
 import com.kasun.userapp.inventory.model.Inventory;
@@ -27,6 +28,8 @@ public class InventoryServiceImpl implements InventoryService {
 	private SearchInventoryLogic searchInventoryLogic;
 	
 	private ViewAllInventoriesLogic viewAllInventoriesLogic;
+	
+	private DeleteInventoryLogic deleteInventoryLogic;
 	
 	@Override
 	public ServiceResponse<List<Inventory>> searchInventory(ServiceRequest<InventorySearchCriteria> serchRequest) {
@@ -51,6 +54,12 @@ public class InventoryServiceImpl implements InventoryService {
 		return ServiceResponseAssembler.assemble(viewAllInventoriesLogic, tenant);
 	}
 	
+	@Override
+	public ServiceResponse<com.kasun.userapp.common.Void> deleteInventory(ServiceRequest<String> inventoryId) {
+		
+		return ServiceResponseAssembler.assemble(deleteInventoryLogic, inventoryId);
+	}
+	
 	@Required
 	public void setAddInventoryLogic(AddInventoryLogic addInventoryLogic) {
 		
@@ -67,5 +76,11 @@ public class InventoryServiceImpl implements InventoryService {
 	public void setViewAllInventoriesLogic(ViewAllInventoriesLogic viewAllInventoriesLogic) {
 		
 		this.viewAllInventoriesLogic = viewAllInventoriesLogic;
+	}
+
+	@Required
+	public void setDeleteInventoryLogic(DeleteInventoryLogic deleteInventoryLogic) {
+		
+		this.deleteInventoryLogic = deleteInventoryLogic;
 	}
 }

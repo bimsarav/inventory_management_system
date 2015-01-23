@@ -24,5 +24,7 @@ public abstract interface InventoryService {
 	ServiceResponse<List<Inventory>> viewAllInventories(ServiceRequest<Tenant> tenant);
 	
 	ServiceResponse<List<Inventory>> searchInventory(ServiceRequest<InventorySearchCriteria> serchRequest);
+
+	ServiceResponse<com.kasun.userapp.common.Void> deleteInventory(ServiceRequest<String> serviceRequest);
 	
 }

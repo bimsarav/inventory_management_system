@@ -3,8 +3,29 @@ $(document).ready(function() {
 	// $("#btnClear").click(doClearAll);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
 	$("body").off("click", "#btnSearch").on("click", "#btnSearch", doSearch);
+	$("body").off("click", "#btnDelete").on("click", "#btnDelete", deleteRow);
 	viewAllInventory();
 });
+
+function deleteRow(data){
+	var inventoryId = data.toElement.attributes.data.value;
+	$.ajax({
+		url : "/GradleSpringMVC/inventory/delete",
+		type : 'POST',
+		dataType : 'json',
+		data : inventoryId,
+		contentType : 'application/json',
+		mimeType : 'application/json'
+	}).done(function(data) {
+		viewAllInventory();
+		// temGrid.addJSONData(data);
+	}).fail(function(error) {
+		// parseToPageAlerts(error.responseText);
+	}).always(function() {
+		// hideLoading()
+	});
+	
+}
 
 function InventoryAddParam() {
 	this.inventoryId = "";
@@ -68,7 +89,7 @@ function viewAllInventory() {
 							+ item.name + '</td><td>' + item.price
 							+ '</td><td>' + item.hospital + '</td><td>'
 							+ item.userNote + '</td><td>' + item.createdDate
-							+ '</td></tr>';
+							+ '</td><td> <button id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
 				});
 				$('#inventoryTable').append(trHTML);
 			}).fail(function(error) {
@@ -91,10 +112,10 @@ function doSearch(){
 		var trHTML = '';
 		$.each(response, function(i, item) {
 			trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
-					+ item.name + '</td><td>' + item.price
-					+ '</td><td>' + item.hospital + '</td><td>'
-					+ item.userNote + '</td><td>' + item.createdDate
-					+ '</td></tr>';
+			+ item.name + '</td><td>' + item.price
+			+ '</td><td>' + item.hospital + '</td><td>'
+			+ item.userNote + '</td><td>' + item.createdDate
+			+ '</td><td> <button id="btnDelete"> Delete </button></td></tr>';
 		});
 		$('#inventoryTable').append(trHTML);
 	}).fail(function(error) {

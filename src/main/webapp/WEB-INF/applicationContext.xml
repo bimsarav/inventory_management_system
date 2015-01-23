@@ -20,12 +20,17 @@
 		<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>
 	
+	<bean id = "deleteInventoryLogic" class="com.kasun.userapp.inventory.logic.DeleteInventoryLogic">
+		<property name="inventoryDao" ref="inventoryDao"/>
+	</bean>
+	
 	<!-- Service -->
 	
 	<bean id = "inventoryService" class="com.kasun.userapp.inventory.service.InventoryServiceImpl">
 		<property name="addInventoryLogic" ref="addInventoryLogic"/>
 		<property name="searchInventoryLogic" ref="searchInventoryLogic"/>
 		<property name="viewAllInventoriesLogic" ref="viewAllInventoriesLogic"/>
+		<property name="deleteInventoryLogic" ref="deleteInventoryLogic"/>
 	</bean>
 	
 	<!-- Dao -->
@@ -42,6 +47,5 @@
 		<property name="username" value="root"/>
 		<property name="password" value="root"/>
 	</bean>
-	
 	
 </beans>

@@ -23,5 +23,7 @@ public interface InventoryDao {
 	List<Inventory> search(InventorySearchCriteria searchCriteria);
 	
 	List<Inventory> viewAll(Tenant tenant);
+	
+	Void deleteInventory(String inventorrId);
 
 }

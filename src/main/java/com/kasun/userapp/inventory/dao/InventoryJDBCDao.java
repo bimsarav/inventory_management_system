@@ -47,6 +47,14 @@ public class InventoryJDBCDao implements InventoryDao {
 		return new Void();
 
 	}
+	
+	@Override
+	public Void deleteInventory(String inventorrId) {
+
+		String sql = "DELETE FROM inventoryData WHERE Inventory_Id = ?";
+		jdbcTemplateObject.update(sql,inventorrId);
+		return new Void();
+	}
 
 	@Override
 	public List<Inventory> search(InventorySearchCriteria searchCriteria) {

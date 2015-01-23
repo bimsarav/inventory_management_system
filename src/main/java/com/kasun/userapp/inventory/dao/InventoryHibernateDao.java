@@ -35,4 +35,10 @@ public class InventoryHibernateDao implements InventoryDao {
 		return null;
 	}
 
+	@Override
+	public Void deleteInventory(String inventorrId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
