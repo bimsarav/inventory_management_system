@@ -1,0 +1,7 @@
+.classpath
+.gitignore.swp
+.gradle/
+.project
+.settings/
+bin/
+src/main/webapp/WEB-INF/applicationContext.xml~
