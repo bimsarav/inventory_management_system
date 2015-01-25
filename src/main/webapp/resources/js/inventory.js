@@ -47,7 +47,6 @@ function deleteRow(data){
 	}).always(function() {
 		// hideLoading()
 	});
-	viewAllInventory();
 }
 
 function InventoryAddParam() {
@@ -105,7 +104,7 @@ function viewAllInventory() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(response) {
-				createInventoryTable(response);
+		createInventoryTable(response);
 			}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
@@ -140,13 +139,13 @@ function doAdd() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
+		viewAllInventory();
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()
 	});
-	viewAllInventory();
 }
 
 function doClearAll() {
