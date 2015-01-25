@@ -1,14 +1,34 @@
 $(document).ready(function() {
+
+	$('form').submit(function(e){
+    		e.preventDefault();
+	});
+	
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
-	// $("#btnClear").click(doClearAll);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
 	$("body").off("click", "#btnSearch").on("click", "#btnSearch", doSearch);
 	$("body").off("click", "#btnDelete").on("click", "#btnDelete", deleteRow);
 	$("body").off("click", "#btnViewAll").on("click", "#btnViewAll", viewAllInventory);
 	$("body").off("click", "#btnGoHome").on("click", "#btnGoHome", goHome);
-	viewAllInventory();
 });
 
+function goHome(){
+	window.location.replace("http://localhost:8080/GradleSpringMVC");
+}
+
+function createInventoryTable(data){
+	$('#inventoryTable').empty();
+	var trHTML = '<tr><td><b>Inventory ID</b></td><td><b>Inventory Name</b></td><td><b>Inventory Price</b></td>'
+		+'<td><b>Hospital name</b></td><td><b>User Note</b></td><td><b>Created Date</b></td></tr>';
+	$.each(data, function(i, item) {
+		trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
+				+ item.name + '</td><td>' + item.price
+				+ '</td><td>' + item.hospital + '</td><td>'
+				+ item.userNote + '</td><td>' + item.createdDate
+				+ '</td><td> <button id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
+	});
+	$('#inventoryTable').append(trHTML);
+}
 
 function deleteRow(data){
 	var inventoryId = data.toElement.attributes.data.value;
@@ -127,24 +147,6 @@ function doAdd() {
 		// hideLoading()
 	});
 	viewAllInventory();
-}
-
-function goHome(){
-	window.location.replace("http://localhost:8080/GradleSpringMVC");
-}
-
-function createInventoryTable(data){
-	$('#inventoryTable').empty();
-	var trHTML = '<tr><td><b>Inventory ID</b></td><td><b>Inventory Name</b></td><td><b>Inventory Price</b></td>'
-		+'<td><b>Hospital name</b></td><td><b>User Note</b></td><td><b>Created Date</b></td></tr>';
-	$.each(data, function(i, item) {
-		trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
-				+ item.name + '</td><td>' + item.price
-				+ '</td><td>' + item.hospital + '</td><td>'
-				+ item.userNote + '</td><td>' + item.createdDate
-				+ '</td><td> <button id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
-	});
-	$('#inventoryTable').append(trHTML);
 }
 
 function doClearAll() {
