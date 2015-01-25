@@ -48,6 +48,9 @@
 				<td>
 					<button id="btnViewAll">View All</button>
 				</td>
+				<td>
+					<button id="btnGoHome">Home</button>
+				</td>
 			</tr>
 		</table>
 	</form>
