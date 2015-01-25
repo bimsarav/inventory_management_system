@@ -4,8 +4,23 @@ $(document).ready(function() {
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
 	$("body").off("click", "#btnSearch").on("click", "#btnSearch", doSearch);
 	$("body").off("click", "#btnDelete").on("click", "#btnDelete", deleteRow);
-	viewAllInventory();
+	$("body").off("click", "#btnViewAll").on("click", "#btnViewAll", viewAllInventory);
+	//viewAllInventory();
 });
+
+function createInventoryTable(data){
+	$('#inventoryTable').empty();
+	var trHTML = '<tr><td><b>Inventory ID</b></td><td><b>Inventory Name</b></td><td><b>Inventory Price</b></td>'
+		+'<td><b>Hospital name</b></td><td><b>User Note</b></td><td><b>Created Date</b></td></tr>';
+	$.each(data, function(i, item) {
+		trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
+				+ item.name + '</td><td>' + item.price
+				+ '</td><td>' + item.hospital + '</td><td>'
+				+ item.userNote + '</td><td>' + item.createdDate
+				+ '</td><td> <button id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
+	});
+	$('#inventoryTable').append(trHTML);
+}
 
 function deleteRow(data){
 	var inventoryId = data.toElement.attributes.data.value;
@@ -24,7 +39,7 @@ function deleteRow(data){
 	}).always(function() {
 		// hideLoading()
 	});
-	
+	viewAllInventory();
 }
 
 function InventoryAddParam() {
@@ -81,17 +96,8 @@ function viewAllInventory() {
 		data : JSON.stringify(populateViewAllParam()),
 		contentType : 'application/json',
 		mimeType : 'application/json'
-	}).done(
-			function(response) {
-				var trHTML = '';
-				$.each(response, function(i, item) {
-					trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
-							+ item.name + '</td><td>' + item.price
-							+ '</td><td>' + item.hospital + '</td><td>'
-							+ item.userNote + '</td><td>' + item.createdDate
-							+ '</td><td> <button id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
-				});
-				$('#inventoryTable').append(trHTML);
+	}).done(function(response) {
+				createInventoryTable(response);
 			}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
@@ -109,15 +115,7 @@ function doSearch(){
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(response) {
-		var trHTML = '';
-		$.each(response, function(i, item) {
-			trHTML += '<tr><td>' + item.inventoryId + '</td><td>'
-			+ item.name + '</td><td>' + item.price
-			+ '</td><td>' + item.hospital + '</td><td>'
-			+ item.userNote + '</td><td>' + item.createdDate
-			+ '</td><td> <button id="btnDelete"> Delete </button></td></tr>';
-		});
-		$('#inventoryTable').append(trHTML);
+		createInventoryTable(response);
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
@@ -134,13 +132,13 @@ function doAdd() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
-		viewAllInventory();
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()
 	});
+	viewAllInventory();
 }
 
 function doClearAll() {
