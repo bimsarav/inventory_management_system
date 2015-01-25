@@ -4,4 +4,5 @@
 .project
 .settings/
 bin/
+build/
 src/main/webapp/WEB-INF/applicationContext.xml~
