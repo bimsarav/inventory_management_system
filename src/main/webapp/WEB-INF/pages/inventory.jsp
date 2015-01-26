@@ -37,19 +37,19 @@
 		<table>
 			<tr>
 				<td>
-					<button id="btnAdd">Add Inventory</button>
+					<button type="button" id="btnAdd">Add Inventory</button>
 				</td>
 				<td>
-					<button id="btnClear">Clear</button>
+					<button type="button" id="btnClear">Clear</button>
 				</td>
 				<td>
-					<button id="btnSearch">Search</button>
+					<button type="button" id="btnSearch">Search</button>
 				</td>
 				<td>
-					<button id="btnViewAll">View All</button>
+					<button type="button" id="btnViewAll">View All</button>
 				</td>
 				<td>
-					<button id="btnGoHome">Home</button>
+					<button type="button" id="btnGoHome">Home</button>
 				</td>
 			</tr>
 		</table>

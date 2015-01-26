@@ -1,8 +1,4 @@
 $(document).ready(function() {
-
-	$('form').submit(function(e){
-    		e.preventDefault();
-	});
 	
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
