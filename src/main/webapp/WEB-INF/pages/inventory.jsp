@@ -7,27 +7,24 @@
 <title>IMS</title>
 <h1>Inventory Management System</h1>
 <h2>Hello User</h2>
-
+<hr></hr>
 <body>
 	<form role="form">
 		<table style="width: 50%">
 			<tr>
 				<td>Inventory ID:</td>
 				<td><input id="inventoryId"></td>
-			</tr>
-			<tr>
+
 				<td>Inventory Name:</td>
 				<td><input id="name"></td>
-			</tr>
-			<tr>
+
 				<td>Inventory Price:</td>
 				<td><input id="price"></td>
 			</tr>
 			<tr>
 				<td>Hospital name:</td>
 				<td><input id="hospital"></td>
-			</tr>
-			<tr>
+
 				<td>User Note:</td>
 				<td><input id="userNote"></td>
 			</tr>
@@ -55,7 +52,7 @@
 		</table>
 	</form>
 
-	<div class="CSSTableGenerator">
+	<div class="inventoryTable">
 		<table id="inventoryTable">
 		</table>
 	</div>
