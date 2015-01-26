@@ -37,26 +37,26 @@
 		<table>
 			<tr>
 				<td>
-					<button type="button" id="btnAdd">Add Inventory</button>
+					<button class="normalButton" type="button" id="btnAdd">Add Inventory</button>
 				</td>
 				<td>
-					<button type="button" id="btnClear">Clear</button>
+					<button class="normalButton" type="button" id="btnClear">Clear</button>
 				</td>
 				<td>
-					<button type="button" id="btnSearch">Search</button>
+					<button class="normalButton" type="button" id="btnSearch">Search</button>
 				</td>
 				<td>
-					<button type="button" id="btnViewAll">View All</button>
+					<button class="normalButton" type="button" id="btnViewAll">View All</button>
 				</td>
 				<td>
-					<button type="button" id="btnGoHome">Home</button>
+					<button class="normalButton" type="button" id="btnGoHome">Home</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
-	<div>
-		<table id="inventoryTable" border="1" cellpadding="2">
+	<div class="CSSTableGenerator">
+		<table id="inventoryTable">
 		</table>
 	</div>
 
