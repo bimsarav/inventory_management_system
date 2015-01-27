@@ -21,7 +21,7 @@ function createInventoryTable(data){
 				+ item.name + '</td><td>' + item.price
 				+ '</td><td>' + item.hospital + '</td><td>'
 				+ item.userNote + '</td><td>' + item.createdDate
-				+ '</td><td> <button class="normalButton" id="btnDelete" data='+ item.inventoryId+' value='+item.inventoryId+'> Delete </button></td></tr>';
+				+ '</td><td> <button class="deleteButton" id="btnDelete" data='+ item.inventoryId+' 					value='+item.inventoryId+'> Delete </button></td></tr>';
 	});
 	$('#inventoryTable').append(trHTML);
 }

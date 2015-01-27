@@ -45,9 +45,6 @@
 				<td>
 					<button class="normalButton" type="button" id="btnViewAll">View All</button>
 				</td>
-				<td>
-					<button class="normalButton" type="button" id="btnGoHome">Home</button>
-				</td>
 			</tr>
 		</table>
 	</form>
@@ -56,7 +53,10 @@
 		<table id="inventoryTable">
 		</table>
 	</div>
-
+	<br>
+	<div>
+		<button class="normalButton" type="button" id="btnGoHome">Home</button>
+	</div>
 	<p id="demo"></p>
 
 	<script src="<c:url value="/resources/core/jquery.min.js" />"></script>

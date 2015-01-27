@@ -39,7 +39,8 @@ public class InventoryController {
 			.getLogger(InventoryController.class);
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
+	public @ResponseBody String addInventory(
+			@RequestBody InventoryAddParam inventoryAddParam) {
 
 		validate(inventoryAddParam);
 		System.out.println("Success " + inventoryAddParam.getName());
@@ -47,11 +48,12 @@ public class InventoryController {
 		inventoryService.addInventory(serviceRequest);
 		return "Inventory Added Succesfully";
 	}
-	
+
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String deleteInventory(@RequestBody String inventoryId) {
 
-		ServiceRequest<String> serviceRequest = new ServiceRequest<>(inventoryId);
+		ServiceRequest<String> serviceRequest = new ServiceRequest<>(
+				inventoryId);
 		inventoryService.deleteInventory(serviceRequest);
 		return "Inventory Deleted Succesfully";
 	}
@@ -77,23 +79,33 @@ public class InventoryController {
 	}
 
 	@RequestMapping(value = "/viewAll", method = RequestMethod.POST)
-	public @ResponseBody List<Inventory> viewInventory(@RequestBody Tenant tanent) {
+	public @ResponseBody List<Inventory> viewInventory(
+			@RequestBody Tenant tanent) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceRequest<Tenant> serviceRequest = new ServiceRequest<>(tanent);
 		ServiceResponse<List<Inventory>> response = inventoryService.viewAllInventories(serviceRequest);
+		
+		if (response.hasError()) {
+			throw new RuntimeException("Error in View");
+		}
 		inventories = response.getPayload();
 		log.info("Inventory view all pass");
 		return inventories;
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody List<Inventory> searchInventory(@RequestBody InventorySearchCriteria searchCriteria) {
+	public @ResponseBody List<Inventory> searchInventory(
+			@RequestBody InventorySearchCriteria searchCriteria) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceRequest<InventorySearchCriteria> serchRequest = new ServiceRequest<InventorySearchCriteria>();
 		serchRequest.setPayload(searchCriteria);
 		ServiceResponse<List<Inventory>> response = inventoryService.searchInventory(serchRequest);
+		
+		if (response.hasError()) {
+			throw new RuntimeException("Error in search...");
+		}
 		validateSearchResulit(response);
 		log.info("Inventory search all pass");
 		inventories = response.getPayload();

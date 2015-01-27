@@ -11,7 +11,7 @@
 <body>
 
 	<form role="form" action="/GradleSpringMVC/inventory/welcome" method="GET">
-       <input class="mainInventoryButton" type="submit" name="inventory" value="Add Inventory">
+       <button class="mainInventoryButton" type="submit" name="inventory"> Inventory </button>
        
 	</form>
 	<p id="demo"></p>
