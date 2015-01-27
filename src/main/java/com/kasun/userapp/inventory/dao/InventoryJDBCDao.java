@@ -47,12 +47,12 @@ public class InventoryJDBCDao implements InventoryDao {
 		return new Void();
 
 	}
-	
+
 	@Override
 	public Void deleteInventory(String inventorrId) {
 
 		String sql = "DELETE FROM inventoryData WHERE Inventory_Id = ?";
-		jdbcTemplateObject.update(sql,inventorrId);
+		jdbcTemplateObject.update(sql, inventorrId);
 		return new Void();
 	}
 
@@ -61,34 +61,50 @@ public class InventoryJDBCDao implements InventoryDao {
 
 		List<Inventory> searchResults = new ArrayList<>();
 		String sql = "SELECT * FROM inventoryData";
-		
-		if(searchCriteria != null || isAllFieldsNotEmpty(searchCriteria)){
-			sql = sql +  " WHERE ";
-			
-			if(!searchCriteria.getInventoryId().isEmpty()){
-				sql = sql + "Inventory_Id = '"+searchCriteria.getInventoryId() +"' ";
+
+		if (searchCriteria != null || isAllFieldsNotEmpty(searchCriteria)) {
+			sql = sql + " WHERE ";
+
+			boolean isThereAnyVariableBefore = false;
+
+			if (!searchCriteria.getInventoryId().isEmpty()) {
+				sql = sql + "Inventory_Id = '"
+						+ searchCriteria.getInventoryId() + "' ";
+				isThereAnyVariableBefore = true;
 			}
-			
-			if(!searchCriteria.getInventoryName().isEmpty()){
-				sql = sql + "AND Name = '"+searchCriteria.getInventoryName() +"' ";
+
+			if (!searchCriteria.getInventoryName().isEmpty()) {
+				if (isThereAnyVariableBefore) {
+					sql = sql + "AND Name = '"
+							+ searchCriteria.getInventoryName() + "' ";
+				} else {
+					sql = sql + "Name = '" + searchCriteria.getInventoryName()+ "' ";
+					isThereAnyVariableBefore = true;
+				}
 			}
-			
-			if(!searchCriteria.getPrice().isEmpty()){
-				sql = sql +"AND Price = '"+searchCriteria.getPrice()+"' ";
+
+			if (!searchCriteria.getPrice().isEmpty()) {
+				if (isThereAnyVariableBefore) {
+					sql = sql + "AND Price = " + searchCriteria.getPrice()
+							+ " ";
+				} else {
+					sql = sql + "Price = " + searchCriteria.getPrice() + " ";
+					isThereAnyVariableBefore = true;
+				}
 			}
-			
-			if(!searchCriteria.getHospital().isEmpty()){
-				sql = sql + "AND Hospital = '"+searchCriteria.getHospital() +"' ";
+
+			if (!searchCriteria.getHospital().isEmpty()) {
+				if (isThereAnyVariableBefore) {
+					sql = sql + "AND Hospital = '"
+							+ searchCriteria.getHospital() + "' ";
+				} else {
+					sql = sql + "Hospital = '" + searchCriteria.getHospital()+ "' ";
+					isThereAnyVariableBefore = true;
+				}
 			}
 		}
-		
-		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 
-//		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql,
-//				searchCriteria.getInventoryId(),
-//				searchCriteria.getInventoryName(), 
-//				searchCriteria.getPrice(),
-//				searchCriteria.getHospital());
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 
 		for (@SuppressWarnings("rawtypes")
 		Map row : rows) {
@@ -106,25 +122,25 @@ public class InventoryJDBCDao implements InventoryDao {
 	}
 
 	private boolean isAllFieldsNotEmpty(Object obj) {
-		
+
 		for (Field field : obj.getClass().getDeclaredFields()) {
-	        if (!field.isAccessible()) {
-	            field.setAccessible(true);
-	        }
-	        
-	        // Danger!
-	        String str;
+			if (!field.isAccessible()) {
+				field.setAccessible(true);
+			}
+
+			// Danger!
+			String str;
 			try {
 				str = (String) field.get(obj);
 				if (!str.isEmpty()) {
-		            return true;
-		        }
+					return true;
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    }
-	    return false;
+		}
+		return false;
 	}
 
 	@Override
