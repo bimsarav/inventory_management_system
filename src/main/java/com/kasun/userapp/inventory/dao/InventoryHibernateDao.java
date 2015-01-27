@@ -1,7 +1,6 @@
 package com.kasun.userapp.inventory.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import com.kasun.userapp.common.Void;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
@@ -13,12 +12,6 @@ public class InventoryHibernateDao implements InventoryDao {
 
 	@Override
 	public Void saveInventory(InventoryAddParam addParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<InventoryAddParam> getInventoryById(String inventoryId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -37,6 +30,12 @@ public class InventoryHibernateDao implements InventoryDao {
 
 	@Override
 	public Void deleteInventory(String inventorrId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void editInventory(Inventory inventory) {
 		// TODO Auto-generated method stub
 		return null;
 	}

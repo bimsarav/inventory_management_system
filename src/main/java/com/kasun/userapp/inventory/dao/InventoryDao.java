@@ -1,7 +1,6 @@
 package com.kasun.userapp.inventory.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import com.kasun.userapp.common.Void;
 import com.kasun.userapp.inventory.dto.InventoryAddParam;
@@ -18,12 +17,12 @@ public interface InventoryDao {
 		
 	Void saveInventory(InventoryAddParam addParam);
 	
-	Set<InventoryAddParam> getInventoryById(String inventoryId);
-	
 	List<Inventory> search(InventorySearchCriteria searchCriteria);
 	
 	List<Inventory> viewAll(Tenant tenant);
 	
 	Void deleteInventory(String inventorrId);
+	
+	Void editInventory(Inventory inventory);
 
 }

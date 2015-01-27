@@ -19,7 +19,7 @@ public abstract interface InventoryService {
 	
 	ServiceResponse<com.kasun.userapp.common.Void> addInventory(ServiceRequest<InventoryAddParam> inventoryAddRequest);
 	
-	Void editInventory(InventoryAddParam editParam);
+	ServiceResponse<Inventory> editInventory(ServiceRequest<Inventory> editRequest);
 	
 	ServiceResponse<List<Inventory>> viewAllInventories(ServiceRequest<Tenant> tenant);
 	

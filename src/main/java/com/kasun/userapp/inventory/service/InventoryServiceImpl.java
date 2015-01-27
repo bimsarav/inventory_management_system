@@ -12,6 +12,7 @@ import com.kasun.userapp.inventory.dto.InventorySearchCriteria;
 import com.kasun.userapp.inventory.dto.Tenant;
 import com.kasun.userapp.inventory.logic.AddInventoryLogic;
 import com.kasun.userapp.inventory.logic.DeleteInventoryLogic;
+import com.kasun.userapp.inventory.logic.EditInventoryLogic;
 import com.kasun.userapp.inventory.logic.SearchInventoryLogic;
 import com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic;
 import com.kasun.userapp.inventory.model.Inventory;
@@ -31,6 +32,8 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	private DeleteInventoryLogic deleteInventoryLogic;
 	
+	private EditInventoryLogic editInventoryLogic;
+	
 	@Override
 	public ServiceResponse<List<Inventory>> searchInventory(ServiceRequest<InventorySearchCriteria> serchRequest) {
 		
@@ -43,10 +46,6 @@ public class InventoryServiceImpl implements InventoryService {
 		return ServiceResponseAssembler.assemble(addInventoryLogic, addParam);
 	}
 
-	@Override
-	public Void editInventory(InventoryAddParam editParam) {
-		return null;
-	}
 
 	@Override
 	public ServiceResponse<List<Inventory>> viewAllInventories(ServiceRequest<Tenant> tenant) {
@@ -58,6 +57,12 @@ public class InventoryServiceImpl implements InventoryService {
 	public ServiceResponse<com.kasun.userapp.common.Void> deleteInventory(ServiceRequest<String> inventoryId) {
 		
 		return ServiceResponseAssembler.assemble(deleteInventoryLogic, inventoryId);
+	}
+	
+	@Override
+	public ServiceResponse<Inventory> editInventory(ServiceRequest<Inventory> editRequest) {
+		
+		return ServiceResponseAssembler.assemble(editInventoryLogic, editRequest);
 	}
 	
 	@Required

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -28,8 +27,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InventoryJDBCDao implements InventoryDao {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(InventoryJDBCDao.class);
+	private static final Logger log = LoggerFactory.getLogger(InventoryJDBCDao.class);
 
 	@SuppressWarnings("unused")
 	private DataSource dataSource;
@@ -51,8 +49,12 @@ public class InventoryJDBCDao implements InventoryDao {
 	@Override
 	public Void deleteInventory(String inventorrId) {
 
-		String sql = "DELETE FROM inventoryData WHERE Inventory_Id = ?";
-		jdbcTemplateObject.update(sql, inventorrId);
+		try {
+			String sql = "DELETE FROM inventoryData WHERE Inventory_Id = ?";
+			jdbcTemplateObject.update(sql, inventorrId);
+		} catch (Exception ex) {
+			throw new RuntimeException("Error in SQL");
+		}
 		return new Void();
 	}
 
@@ -68,15 +70,14 @@ public class InventoryJDBCDao implements InventoryDao {
 			boolean isThereAnyVariableBefore = false;
 
 			if (!searchCriteria.getInventoryId().isEmpty()) {
-				sql = sql + "Inventory_Id = '"
-						+ searchCriteria.getInventoryId() + "' ";
+				sql = sql + "Inventory_Id = '"+ searchCriteria.getInventoryId() + "' ";
 				isThereAnyVariableBefore = true;
 			}
 
 			if (!searchCriteria.getInventoryName().isEmpty()) {
+				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Name = '"
-							+ searchCriteria.getInventoryName() + "' ";
+					sql = sql + "AND Name = '"+ searchCriteria.getInventoryName() + "' ";
 				} else {
 					sql = sql + "Name = '" + searchCriteria.getInventoryName()+ "' ";
 					isThereAnyVariableBefore = true;
@@ -84,9 +85,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			}
 
 			if (!searchCriteria.getPrice().isEmpty()) {
+				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Price = " + searchCriteria.getPrice()
-							+ " ";
+					sql = sql + "AND Price = " + searchCriteria.getPrice()+ " ";
 				} else {
 					sql = sql + "Price = " + searchCriteria.getPrice() + " ";
 					isThereAnyVariableBefore = true;
@@ -94,9 +95,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			}
 
 			if (!searchCriteria.getHospital().isEmpty()) {
+				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Hospital = '"
-							+ searchCriteria.getHospital() + "' ";
+					sql = sql + "AND Hospital = '"+ searchCriteria.getHospital() + "' ";
 				} else {
 					sql = sql + "Hospital = '" + searchCriteria.getHospital()+ "' ";
 					isThereAnyVariableBefore = true;
@@ -121,6 +122,43 @@ public class InventoryJDBCDao implements InventoryDao {
 		return searchResults;
 	}
 
+
+	@Override
+	public List<Inventory> viewAll(Tenant tenant) {
+
+		List<Inventory> searchResults = new ArrayList<>();
+		String sql = "SELECT * FROM inventoryData ";
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
+
+		for (@SuppressWarnings("rawtypes")
+		Map row : rows) {
+			Inventory inventory = new Inventory();
+			inventory.setInventoryId((String) (row.get("Inventory_Id")));
+			inventory.setName((String) (row.get("Name")));
+			inventory.setPrice((Integer) (row.get("Price")));
+			inventory.setHospital((String) (row.get("Hospital")));
+			inventory.setUserNote((String) (row.get("User_Note")));
+			inventory.setCreatedDate((Date) (row.get("Created_Date")));
+			searchResults.add(inventory);
+		}
+		return searchResults;
+	}
+
+	@Override
+	public Void editInventory(Inventory inventory) {
+	
+		try {
+			String sql = "UPDATE inventoryData SET Inventory_Id=?,Name=?,Price=?,Hospital=?,User_Note=?,Created_Date=?";
+			jdbcTemplateObject.update(sql, inventory.getInventoryId(),
+					inventory.getName(),
+					Integer.toString(inventory.getPrice()),
+					inventory.getHospital(), new Date());
+		} catch (Exception ex) {
+			throw new RuntimeException("Error in Inventory Edit");
+		}
+		return new Void();
+	}
+	
 	private boolean isAllFieldsNotEmpty(Object obj) {
 
 		for (Field field : obj.getClass().getDeclaredFields()) {
@@ -128,7 +166,6 @@ public class InventoryJDBCDao implements InventoryDao {
 				field.setAccessible(true);
 			}
 
-			// Danger!
 			String str;
 			try {
 				str = (String) field.get(obj);
@@ -136,18 +173,13 @@ public class InventoryJDBCDao implements InventoryDao {
 					return true;
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return false;
 	}
-
-	@Override
-	public Set<InventoryAddParam> getInventoryById(String inventoryId) {
-		return null;
-	}
-
+	
+	
 	@Required
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -156,30 +188,5 @@ public class InventoryJDBCDao implements InventoryDao {
 
 	private JdbcTemplate getJdbcTemplate() {
 		return this.jdbcTemplateObject;
-	}
-
-	@Override
-	public List<Inventory> viewAll(Tenant tenant) {
-
-		List<Inventory> searchResults = new ArrayList<>();
-		String sql = "SELECT * FROM inventoryData ";
-
-		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
-
-		for (@SuppressWarnings("rawtypes")
-		Map row : rows) {
-
-			Inventory inventory = new Inventory();
-			inventory.setInventoryId((String) (row.get("Inventory_Id")));
-			inventory.setName((String) (row.get("Name")));
-			inventory.setPrice((Integer) (row.get("Price")));
-			inventory.setHospital((String) (row.get("Hospital")));
-			inventory.setUserNote((String) (row.get("User_Note")));
-			inventory.setCreatedDate((Date) (row.get("Created_Date")));
-
-			searchResults.add(inventory);
-
-		}
-		return searchResults;
 	}
 }

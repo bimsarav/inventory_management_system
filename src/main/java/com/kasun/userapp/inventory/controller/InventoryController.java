@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kasun.userapp.common.ServiceRequest;
@@ -39,8 +38,7 @@ public class InventoryController {
 			.getLogger(InventoryController.class);
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody String addInventory(
-			@RequestBody InventoryAddParam inventoryAddParam) {
+	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {
 
 		validate(inventoryAddParam);
 		System.out.println("Success " + inventoryAddParam.getName());
@@ -48,6 +46,7 @@ public class InventoryController {
 		inventoryService.addInventory(serviceRequest);
 		return "Inventory Added Succesfully";
 	}
+	
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String deleteInventory(@RequestBody String inventoryId) {
@@ -57,30 +56,24 @@ public class InventoryController {
 		inventoryService.deleteInventory(serviceRequest);
 		return "Inventory Deleted Succesfully";
 	}
-
-	private ServiceRequest<InventoryAddParam> convertAddParamtoServiceRequest(
-			InventoryAddParam inventoryAddParam) {
-
-		ServiceRequest<InventoryAddParam> request = new ServiceRequest<InventoryAddParam>();
-		request.setPayload(inventoryAddParam);
-		return request;
-	}
+	
 
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String welcomePageTemp() {
 		log.debug("welcome");
 		return "inventory";
 	}
+	
 
 	@RequestMapping(value = "/inv", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public String welcomePage(@RequestBody Tenant tanent) {
 		log.debug("welcome");
 		return "index";
 	}
+	
 
 	@RequestMapping(value = "/viewAll", method = RequestMethod.POST)
-	public @ResponseBody List<Inventory> viewInventory(
-			@RequestBody Tenant tanent) {
+	public @ResponseBody List<Inventory> viewInventory(@RequestBody Tenant tanent) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceRequest<Tenant> serviceRequest = new ServiceRequest<>(tanent);
@@ -93,10 +86,10 @@ public class InventoryController {
 		log.info("Inventory view all pass");
 		return inventories;
 	}
+	
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody List<Inventory> searchInventory(
-			@RequestBody InventorySearchCriteria searchCriteria) {
+	public @ResponseBody List<Inventory> searchInventory(@RequestBody InventorySearchCriteria searchCriteria) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		ServiceRequest<InventorySearchCriteria> serchRequest = new ServiceRequest<InventorySearchCriteria>();
@@ -107,15 +100,38 @@ public class InventoryController {
 			throw new RuntimeException("Error in search...");
 		}
 		validateSearchResulit(response);
-		log.info("Inventory search all pass");
+		log.info("Inventory search pass");
 		inventories = response.getPayload();
 		return inventories;
 	}
+	
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody Inventory editInventory(@RequestBody Inventory inventory) {
+
+		ServiceRequest<Inventory> editRequest = new ServiceRequest<Inventory>(inventory);
+		ServiceResponse<Inventory> response = inventoryService.editInventory(editRequest);
+
+		if (response.hasError()) {
+			throw new RuntimeException("Error in Edition");
+		}
+		log.info("Inventory Edit pass");
+		return response.getPayload();
+	}
+	
+	
+	private ServiceRequest<InventoryAddParam> convertAddParamtoServiceRequest(InventoryAddParam inventoryAddParam) {
+
+		ServiceRequest<InventoryAddParam> request = new ServiceRequest<InventoryAddParam>();
+		request.setPayload(inventoryAddParam);
+		return request;
+	}
+	
 
 	private void validateSearchResulit(ServiceResponse<List<Inventory>> response) {
-		// TODO Auto-generated method stub
 
 	}
+	
 
 	private void validate(InventoryAddParam inventoryAddParam) {
 
@@ -128,9 +144,10 @@ public class InventoryController {
 			throw new RuntimeException("Inventory id can not be null");
 		}
 	}
+	
 
 	public void setInventoryService(InventoryService inventoryService) {
+		
 		this.inventoryService = inventoryService;
 	}
-
 }
