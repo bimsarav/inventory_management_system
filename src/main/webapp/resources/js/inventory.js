@@ -118,7 +118,11 @@ function doSearch(){
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(response) {
-		createInventoryTable(response);
+		if(response != null && response != ""){
+			createInventoryTable(response);
+		}else {
+			alert("Search Result Not Found");
+		}
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
@@ -135,6 +139,7 @@ function doAdd() {
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(data) {
+		alert(data);
 		viewAllInventory();
 		// temGrid.addJSONData(data);
 	}).fail(function(error) {
