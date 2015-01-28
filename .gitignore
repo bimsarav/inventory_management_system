@@ -7,4 +7,5 @@ gradle.properties~
 .settings/
 bin/
 build/
+src/main/resources/log4j.properties
 src/main/webapp/WEB-INF/applicationContext.xml~

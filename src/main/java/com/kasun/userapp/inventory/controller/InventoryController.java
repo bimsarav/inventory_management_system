@@ -34,8 +34,7 @@ public class InventoryController {
 	@Autowired
 	private InventoryService inventoryService;
 
-	private static final Logger log = LoggerFactory
-			.getLogger(InventoryController.class);
+	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String addInventory(@RequestBody InventoryAddParam inventoryAddParam) {

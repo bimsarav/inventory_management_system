@@ -27,11 +27,12 @@ repositories {
 
 //Project dependencies
 dependencies {
-	compile 'ch.qos.logback:logback-classic:' + logbackVersion,
-			'org.springframework:spring-webmvc:' + springVersion,
-			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
+	compile 'org.springframework:spring-webmvc:' + springVersion,
 			'org.springframework:spring-jdbc:' + springJDBCVersion,
 			'org.springframework:spring-tx:4.0.7.RELEASE',
+			'log4j:log4j:' + log4jVersion,
+			'org.slf4j:slf4j-log4j12:' + slf4jVersion,
+			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
 			'org.codehaus.jackson:jackson-mapper-asl:' + jacksonVersion,
 			'jstl:jstl:1.2'
 			
