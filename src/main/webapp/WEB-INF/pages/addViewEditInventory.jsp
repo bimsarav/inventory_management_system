@@ -43,6 +43,9 @@
 			</tr>
 		</table>
 	</div>
+	
+	<div id="massageDisplay">
+	</div>
 
 	<p id="demo"></p>
 
