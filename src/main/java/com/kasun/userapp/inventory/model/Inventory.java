@@ -6,12 +6,18 @@ public class Inventory {
 
 	private String inventoryId;
 	private String name;
-	private int amount;
-	private int price;
-	private String hospital;
-	private String userNote;
+	private int availableAmount;
+	private int soldAmount;
+	@SuppressWarnings("unused")
+	private int restAmount;
+	private int pricePerUnit;
+	private String location;
+	private String description;
 	private Date createdDate;
 
+	public void setRestAmount() {
+		this.restAmount = this.availableAmount - this.soldAmount;
+	}
 	
 	public String getInventoryId() {
 		return inventoryId;
@@ -29,28 +35,36 @@ public class Inventory {
 		this.name = name;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getAvailableAmount() {
+		return availableAmount;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setAvailableAmount(int availableAmount) {
+		this.availableAmount = availableAmount;
 	}
 
-	public String getHospital() {
-		return hospital;
+	public int getPricePerUnit() {
+		return pricePerUnit;
 	}
 
-	public void setHospital(String hospital) {
-		this.hospital = hospital;
+	public void setPricePerUnit(int pricePerUnit) {
+		this.pricePerUnit = pricePerUnit;
 	}
 
-	public String getUserNote() {
-		return userNote;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setUserNote(String userNote) {
-		this.userNote = userNote;
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getCreatedDate() {
@@ -61,11 +75,15 @@ public class Inventory {
 		this.createdDate = createdDate;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getSoldAmount() {
+		return soldAmount;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setSoldAmount(int soldAmount) {
+		this.soldAmount = soldAmount;
 	}
+
+	public int getRestAmount() {
+		return (this.availableAmount-this.soldAmount);
+	}	
 }

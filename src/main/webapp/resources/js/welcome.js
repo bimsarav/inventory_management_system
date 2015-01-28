@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
-	$("body").off("click", "#btnShowInventorys").on("click", "#btnShowInventorys", changeContent);
+	$("body").off("click", "#btnShowInventorys").on("click", "#btnShowInventorys", viewInventory);
+	$("body").off("click", "#btnMakeReservation").on("click", "#btnMakeReservation", viewMakeReservation);
 });
 
 function showInventories(){
@@ -20,8 +21,12 @@ function showInventories(){
 	});
 }
 
-function changeContent() {
+function viewInventory() {
     window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/welcome");
+}
+
+function viewMakeReservation() {
+    window.location.replace("http://localhost:8080/GradleSpringMVC/reservation/makeReservation/welcome");
 }
 
 function Tenant() {

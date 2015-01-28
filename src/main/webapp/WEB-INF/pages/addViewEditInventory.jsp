@@ -21,15 +21,18 @@
 				<td><input id="name"></td>
 			</tr>
 			<tr>
-				<td><p>Inventory Price:</p></td>
-				<td><input id="price"></td>
-
-				<td><p>Hospital name:</p></td>
-				<td><input id="hospital"></td>
+				<td><p>Available Amount:</p></td>
+				<td><input id="availableAmount"></td>
+			
+				<td><p>Price Per Unit:</p></td>
+				<td><input id="pricePerUnit"></td>
 			</tr>
 			<tr>
-				<td><p>User Note:</p></td>
-				<td><input id="userNote"></td>
+				<td><p>Location:</p></td>
+				<td><input id="location"></td>
+			
+				<td><p>Description:</p></td>
+				<td><input id="description"></td>
 			</tr>
 		</table>
 		<br> <br>

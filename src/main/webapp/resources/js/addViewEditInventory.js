@@ -30,20 +30,20 @@ function goBack() {
 function InventoryAddParam() {
 	this.inventoryId = "";
 	this.name = "";
-	this.amount = "";
-	this.price = "";
-	this.hospital = "";
-	this.userNote = "";
+	this.availableAmount = "";
+	this.pricePerUnit = "";
+	this.location = "";
+	this.description = "";
 }
 
 function populateObject() {
 	var addParam = new InventoryAddParam();
 	addParam.inventoryId = $("#inventoryId").val();
 	addParam.name = $("#name").val();
-	addParam.amount = 1;
-	addParam.price = $("#price").val();
-	addParam.hospital = $("#hospital").val();
-	addParam.userNote = $("#userNote").val();
+	addParam.availableAmount = $("#availableAmount").val();;
+	addParam.pricePerUnit = $("#pricePerUnit").val();
+	addParam.location = $("#location").val();
+	addParam.description = $("#description").val();
 	return addParam;
 }
 

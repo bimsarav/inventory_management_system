@@ -36,10 +36,12 @@ public class InventoryJDBCDao implements InventoryDao {
 	@Override
 	public Void saveInventory(InventoryAddParam addParam) {
 
-		String sql = "INSERT INTO inventoryData VALUES (?, ?, ?, ?,?,?)";
+		String sql = "INSERT INTO inventoryData VALUES (?, ?, ?, ?,?,?,?,?)";
 		jdbcTemplateObject.update(sql, addParam.getInventoryId(),
-				addParam.getName(), Integer.parseInt(addParam.getPrice()),
-				addParam.getHospital(), addParam.getUserNote(), new Date());
+				addParam.getName(),
+				Integer.parseInt(addParam.getAvailableAmount()), 0,
+				Integer.parseInt(addParam.getPricePerUnit()),
+				addParam.getLocation(), addParam.getDescription(), new Date());
 
 		log.info("Inventory Saved Succesfully");
 		return new Void();
@@ -112,9 +114,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			Inventory inventory = new Inventory();
 			inventory.setInventoryId((String) (row.get("Inventory_Id")));
 			inventory.setName((String) (row.get("Name")));
-			inventory.setPrice((Integer) (row.get("Price")));
-			inventory.setHospital((String) (row.get("Hospital")));
-			inventory.setUserNote((String) (row.get("User_Note")));
+			inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
+			inventory.setLocation((String) (row.get("Location")));
+			inventory.setDescription((String) (row.get("Description")));
 			inventory.setCreatedDate((Date) (row.get("Created_Date")));
 
 			searchResults.add(inventory);
@@ -135,9 +137,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			Inventory inventory = new Inventory();
 			inventory.setInventoryId((String) (row.get("Inventory_Id")));
 			inventory.setName((String) (row.get("Name")));
-			inventory.setPrice((Integer) (row.get("Price")));
-			inventory.setHospital((String) (row.get("Hospital")));
-			inventory.setUserNote((String) (row.get("User_Note")));
+			inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
+			inventory.setLocation((String) (row.get("Location")));
+			inventory.setDescription((String) (row.get("Description")));
 			inventory.setCreatedDate((Date) (row.get("Created_Date")));
 			searchResults.add(inventory);
 		}
@@ -148,11 +150,12 @@ public class InventoryJDBCDao implements InventoryDao {
 	public Void editInventory(Inventory inventory) {
 	
 		try {
+			//TODO Change sql
 			String sql = "UPDATE inventoryData SET Inventory_Id=?,Name=?,Price=?,Hospital=?,User_Note=?,Created_Date=?";
 			jdbcTemplateObject.update(sql, inventory.getInventoryId(),
 					inventory.getName(),
-					Integer.toString(inventory.getPrice()),
-					inventory.getHospital(), new Date());
+					Integer.toString(inventory.getPricePerUnit()),
+					inventory.getLocation(), new Date());
 		} catch (Exception ex) {
 			throw new RuntimeException("Error in Inventory Edit");
 		}

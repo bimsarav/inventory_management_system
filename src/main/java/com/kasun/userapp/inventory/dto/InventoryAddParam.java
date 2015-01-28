@@ -12,16 +12,11 @@ import java.io.Serializable;
 public class InventoryAddParam implements Serializable {
 
 	private String inventoryId;
-
-	private String hospital;
-
 	private String name;
-
-	private String amount;
-
-	private String price;
-
-	private String userNote;
+	private String availableAmount;
+	private String pricePerUnit;
+	private String location;
+	private String description;
 
 	public String getName() {
 		return name;
@@ -31,28 +26,20 @@ public class InventoryAddParam implements Serializable {
 		this.name = name;
 	}
 
-	public String getPrice() {
-		return price;
+	public String getPricePerUnit() {
+		return pricePerUnit;
 	}
 
-	public void setPrice(String price) {
-		this.price = price;
+	public void setPricePerUnit(String pricePerUnit) {
+		this.pricePerUnit = pricePerUnit;
 	}
 
-	public String getHospital() {
-		return hospital;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setHospital(String hospital) {
-		this.hospital = hospital;
-	}
-
-	public String getUserNote() {
-		return userNote;
-	}
-
-	public void setUserNote(String userNote) {
-		this.userNote = userNote;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getInventoryId() {
@@ -63,11 +50,19 @@ public class InventoryAddParam implements Serializable {
 		this.inventoryId = inventoryId;
 	}
 
-	public String getAmount() {
-		return amount;
+	public String getAvailableAmount() {
+		return availableAmount;
 	}
 
-	public void setAmount(String amount) {
-		this.amount = amount;
+	public void setAvailableAmount(String availableAmount) {
+		this.availableAmount = availableAmount;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

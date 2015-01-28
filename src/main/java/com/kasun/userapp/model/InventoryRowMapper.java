@@ -20,9 +20,11 @@ public class InventoryRowMapper implements RowMapper
 		Inventory inventory = new Inventory();
 		inventory.setInventoryId(rs.getString("Inventory_Id"));
 		inventory.setName(rs.getString("Name"));
-		inventory.setPrice(rs.getInt("Price"));
-		inventory.setHospital(rs.getString("Hospital"));
-		inventory.setUserNote(rs.getString("User_Note"));
+		inventory.setAvailableAmount(rs.getInt("Available_Amount"));
+		inventory.setSoldAmount(rs.getInt("Sold_Amount"));
+		inventory.setPricePerUnit(rs.getInt("Price_Per_Unit"));
+		inventory.setLocation(rs.getString("Location"));
+		inventory.setDescription(rs.getString("Description"));
 		inventory.setCreatedDate(rs.getDate("Created_Date"));
 		
 		return inventory;

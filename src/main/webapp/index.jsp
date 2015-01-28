@@ -11,7 +11,8 @@
 <body>
 
 <!-- 	<form role="form" action="/GradleSpringMVC/inventory/welcome" method="GET"> -->
-       <button class="mainInventoryButton" type="button" id="btnShowInventorys"> Inventory </button>
+       <button class="mainInventoryButton" type="button" id="btnShowInventorys"> Inventory </button> 
+       <button class="mainInventoryButton" type="button" id="btnMakeReservation"> Make Reservation </button>
        
 <!-- 	</form> -->
 	<p id="demo"></p>

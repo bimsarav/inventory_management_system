@@ -32,7 +32,7 @@ public class AddInventoryLogic extends StatelessServiceLogic<Void, InventoryAddP
 	private void validate(InventoryAddParam addParam) throws Exception {
 
 		if (addParam == null) {
-			throw new Exception();
+			throw new Exception("Add Param is Null");
 		}
 	}
 

@@ -37,9 +37,11 @@ USE INVENTORY;
 CREATE TABLE IF NOT EXISTS `inventoryData` (
   `Inventory_Id` varchar(30) NOT NULL,
   `Name` varchar(30) DEFAULT NULL,
-  `Price` int(6) DEFAULT NULL,
-  `Hospital` varchar(30) DEFAULT NULL,
-  `User_Note` varchar(100) DEFAULT NULL,
+  `Available_Amount` int(6) DEFAULT NULL,
+  `Sold` int(6) DEFAULT NULL,
+  `Price_Per_Unit` int(6) DEFAULT NULL,
+  `Location` varchar(30) DEFAULT NULL,
+  `Description` varchar(100) DEFAULT NULL,
   `Created_Date` date DEFAULT NULL,
   PRIMARY KEY (`Inventory_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,8 +50,6 @@ CREATE TABLE IF NOT EXISTS `inventoryData` (
 -- Dumping data for table `inventoryData`
 --
 
-INSERT INTO `inventoryData` (`Inventory_Id`, `Name`, `Price`, `Hospital`, `User_Note`, `Created_Date`) VALUES
-('inv123', 'ECHO Machine', 25000, 'Badulla Hospital', 'User Note', '2015-01-04');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
