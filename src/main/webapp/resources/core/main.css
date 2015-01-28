@@ -6,8 +6,12 @@
 h1 { color: navy; text-align: center;}
 
 body {
-    background-image: url("resources/images/background.jpg");
+    background-image: url("images/background.jpg");
     background-color: #cccccc;
+}
+
+.table {
+	width:230%;
 } 
 
 .normalButton {

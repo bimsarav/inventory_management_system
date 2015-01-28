@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	$("body").off("click", "#btnShowInventorys").on("click", "#btnShowInventorys", showInventories);
+	$("body").off("click", "#btnShowInventorys").on("click", "#btnShowInventorys", changeContent);
 });
 
 function showInventories(){
@@ -12,11 +12,16 @@ function showInventories(){
 		contentType : 'application/json',
 		mimeType : 'application/json'
 	}).done(function(response) {
-			}).fail(function(error) {
+		
+	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {
 		// hideLoading()
 	});
+}
+
+function changeContent() {
+    window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/welcome");
 }
 
 function Tenant() {
@@ -28,12 +33,3 @@ function createSendData(){
 	tenant.tenantId = "SRI";
 	return tenant;
 }
-
-
-
-
-
-
-
-
-

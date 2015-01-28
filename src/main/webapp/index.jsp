@@ -10,10 +10,10 @@
 <hr></hr>
 <body>
 
-	<form role="form" action="/GradleSpringMVC/inventory/welcome" method="GET">
-       <button class="mainInventoryButton" type="submit" name="inventory"> Inventory </button>
+<!-- 	<form role="form" action="/GradleSpringMVC/inventory/welcome" method="GET"> -->
+       <button class="mainInventoryButton" type="button" id="btnShowInventorys"> Inventory </button>
        
-	</form>
+<!-- 	</form> -->
 	<p id="demo"></p>
 
 <script src="<c:url value="/resources/core/jquery.min.js" />"></script>

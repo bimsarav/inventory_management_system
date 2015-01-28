@@ -1,28 +1,27 @@
 $(document).ready(
 		function() {
 
-			$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
-			$("body").off("click", "#btnClear").on("click", "#btnClear",
-					doClearAll);
-			$("body").off("click", "#btnSearch").on("click", "#btnSearch",
-					doSearch);
-			$("body").off("click", "#btnDelete").on("click", "#btnDelete",
-					deleteRow);
-			$("body").off("click", "#btnViewAll").on("click", "#btnViewAll",
-					viewAllInventory);
-			$("body").off("click", "#btnGoHome").on("click", "#btnGoHome",
-					goHome);
+			$("body").off("click", "#btnViewAddInventory").on("click", "#btnViewAddInventory", viewAddInventory);
+			$("body").off("click", "#btnClear").on("click", "#btnClear",doClearAll);
+			$("body").off("click", "#btnSearch").on("click", "#btnSearch",doSearch);
+			$("body").off("click", "#btnDelete").on("click", "#btnDelete",deleteRow);
+			$("body").off("click", "#btnViewAll").on("click", "#btnViewAll",viewAllInventory);
+			$("body").off("click", "#btnGoHome").on("click", "#btnGoHome",goHome);
 		});
 
 function goHome() {
 	window.location.replace("http://localhost:8080/GradleSpringMVC");
 }
 
+function viewAddInventory(){
+	window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/add_edit_view");
+}
+
 function createInventoryTable(data) {
 	$('#inventoryTable').empty();
 	if (data != null) {
 		var trHTML = '<tr><td><b>Inventory ID</b></td><td><b>Inventory Name</b></td><td><b>Inventory Price</b></td>'
-				+ '<td><b>Hospital name</b></td><td><b>User Note</b></td><td><b>Created Date</b></td><td><b>Action</b></td></tr>';
+				+ '<td><b>Hospital name</b></td><td><b>User Note</b></td><td><b>Created Date</b></td><td><b>Delete</b></td><td><b>Edit</b></td></tr>';
 		$
 				.each(
 						data,
@@ -42,7 +41,10 @@ function createInventoryTable(data) {
 									+ '</td><td> <button class="deleteButton" id="btnDelete" data='
 									+ item.inventoryId + ' 					value='
 									+ item.inventoryId
-									+ '> Delete </button></td></tr>';
+									+ '> Delete </button></td><td> <button class="deleteButton" id="btnEdit" data='
+									+ item.inventoryId + ' value='
+									+ item.inventoryId
+									+ '> Edit </button></td></tr>';
 						});
 		$('#inventoryTable').append(trHTML);
 	} else {
@@ -67,14 +69,6 @@ function deleteRow(data) {
 	}).always(function() {
 		// hideLoading()
 	});
-}
-
-function InventoryAddParam() {
-	this.inventoryId = "";
-	this.name = "";
-	this.price = "";
-	this.hospital = "";
-	this.userNote = "";
 }
 
 function Tenant() {
@@ -103,16 +97,6 @@ function populateViewAllParam() {
 	var viewAll = new Tenant();
 	viewAll.tenantId = "SRI";
 	return viewAll;
-}
-
-function populateObject() {
-	var addParam = new InventoryAddParam();
-	addParam.inventoryId = $("#inventoryId").val();
-	addParam.name = $("#name").val();
-	addParam.price = $("#price").val();
-	addParam.hospital = $("#hospital").val();
-	addParam.userNote = $("#userNote").val();
-	return addParam;
 }
 
 function viewAllInventory() {
@@ -147,25 +131,6 @@ function doSearch() {
 		} else {
 			alert("Search Result Not Found");
 		}
-	}).fail(function(error) {
-		// parseToPageAlerts(error.responseText);
-	}).always(function() {
-		// hideLoading()
-	});
-}
-
-function doAdd() {
-	$.ajax({
-		url : "/GradleSpringMVC/inventory/add",
-		type : 'POST',
-		dataType : 'json',
-		data : JSON.stringify(populateObject()),
-		contentType : 'application/json',
-		mimeType : 'application/json'
-	}).done(function(data) {
-		alert(data);
-		viewAllInventory();
-		// temGrid.addJSONData(data);
 	}).fail(function(error) {
 		// parseToPageAlerts(error.responseText);
 	}).always(function() {

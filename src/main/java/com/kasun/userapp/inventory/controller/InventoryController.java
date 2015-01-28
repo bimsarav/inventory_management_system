@@ -64,11 +64,10 @@ public class InventoryController {
 		return "inventory";
 	}
 	
-
-	@RequestMapping(value = "/inv", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String welcomePage(@RequestBody Tenant tanent) {
-		log.debug("welcome");
-		return "index";
+	@RequestMapping(value = "/add_edit_view", method = RequestMethod.GET)
+	public String add_edit_view_page() {
+		log.debug("view/edit/add");
+		return "addViewEditInventory";
 	}
 	
 
