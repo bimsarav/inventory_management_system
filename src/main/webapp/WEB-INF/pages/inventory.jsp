@@ -10,23 +10,20 @@
 <hr></hr>
 <body>
 	<form role="form">
-		<table style="width: 50%">
+		<table class="inputTable">
 			<tr>
-				<td>Inventory ID:</td>
+				<td><p>Inventory ID:</p></td>
 				<td><input id="inventoryId"></td>
 
-				<td>Inventory Name:</td>
+				<td><p>Inventory Name:</p></td>
 				<td><input id="name"></td>
-
-				<td>Inventory Price:</td>
-				<td><input id="price"></td>
 			</tr>
 			<tr>
-				<td>Hospital name:</td>
+				<td><p>Inventory Price:</p></td>
+				<td><input id="price"></td>
+			
+				<td><p>Hospital name:</p></td>
 				<td><input id="hospital"></td>
-
-				<td>User Note:</td>
-				<td><input id="userNote"></td>
 			</tr>
 			<tr>
 			</tr>

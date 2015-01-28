@@ -2,10 +2,15 @@ $(document).ready(function() {
 	$("body").off("click", "#btnAdd").on("click", "#btnAdd", doAdd);
 	$("body").off("click", "#btnClear").on("click", "#btnClear", doClearAll);
 	$("body").off("click", "#btnGoHome").on("click", "#btnGoHome", goHome);
+	$("body").off("click", "#btnBack").on("click", "#btnBack", goBack);
 });
 
 function goHome() {
 	window.location.replace("http://localhost:8080/GradleSpringMVC");
+}
+
+function goBack(){
+	window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/welcome");
 }
 
 function InventoryAddParam() {
@@ -45,4 +50,12 @@ function doAdd() {
 	}).always(function() {
 		// hideLoading()
 	});
+}
+
+function doClearAll() {
+	$("#inventoryId").val("");
+	$("#name").val("");
+	$("#price").val("");
+	$("#hospital").val("");
+	$("#userNote").val("");
 }
