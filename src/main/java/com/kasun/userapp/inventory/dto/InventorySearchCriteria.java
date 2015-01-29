@@ -12,8 +12,8 @@ public class InventorySearchCriteria implements Serializable {
 
 	private String inventoryId;
 	private String inventoryName;
-	private String hospital;
-	private String price;
+	private String location;
+	private String pricePerUnit;
 	private String createdDate;
 
 	public String getInventoryId() {
@@ -32,20 +32,20 @@ public class InventorySearchCriteria implements Serializable {
 		this.inventoryName = inventoryName;
 	}
 
-	public String getHospital() {
-		return hospital;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setHospital(String hospital) {
-		this.hospital = hospital;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public String getPrice() {
-		return price;
+	public String getPricePerUnit() {
+		return pricePerUnit;
 	}
 
-	public void setPrice(String price) {
-		this.price = price;
+	public void setPricePerUnit(String pricePerUnit) {
+		this.pricePerUnit = pricePerUnit;
 	}
 
 	public String getCreatedDate() {

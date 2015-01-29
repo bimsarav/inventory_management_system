@@ -86,22 +86,22 @@ public class InventoryJDBCDao implements InventoryDao {
 				}
 			}
 
-			if (!searchCriteria.getPrice().isEmpty()) {
+			if (!searchCriteria.getPricePerUnit().isEmpty()) {
 				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Price = " + searchCriteria.getPrice()+ " ";
+					sql = sql + "AND Price = " + searchCriteria.getPricePerUnit()+ " ";
 				} else {
-					sql = sql + "Price = " + searchCriteria.getPrice() + " ";
+					sql = sql + "Price = " + searchCriteria.getPricePerUnit() + " ";
 					isThereAnyVariableBefore = true;
 				}
 			}
 
-			if (!searchCriteria.getHospital().isEmpty()) {
+			if (!searchCriteria.getLocation().isEmpty()) {
 				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Hospital = '"+ searchCriteria.getHospital() + "' ";
+					sql = sql + "AND Hospital = '"+ searchCriteria.getLocation() + "' ";
 				} else {
-					sql = sql + "Hospital = '" + searchCriteria.getHospital()+ "' ";
+					sql = sql + "Hospital = '" + searchCriteria.getLocation()+ "' ";
 					isThereAnyVariableBefore = true;
 				}
 			}
@@ -137,6 +137,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			Inventory inventory = new Inventory();
 			inventory.setInventoryId((String) (row.get("Inventory_Id")));
 			inventory.setName((String) (row.get("Name")));
+			inventory.setAvailableAmount((Integer)(row.get("Available_Amount")));
+			inventory.setSoldAmount((Integer)(row.get("Sold")));
+			inventory.setRestAmount();
 			inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
 			inventory.setLocation((String) (row.get("Location")));
 			inventory.setDescription((String) (row.get("Description")));

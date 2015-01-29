@@ -78,7 +78,7 @@ public class InventoryController {
 		ServiceResponse<List<Inventory>> response = inventoryService.viewAllInventories(serviceRequest);
 		
 		if (response.hasError()) {
-			throw new RuntimeException("Error in View");
+			throw new RuntimeException("Error in View All Inventories");
 		}
 		inventories = response.getPayload();
 		log.info("Inventory view all pass");

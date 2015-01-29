@@ -19,10 +19,10 @@
 				<td><input id="name"></td>
 			</tr>
 			<tr>
-				<td><p>Inventory Price:</p></td>
+				<td><p>Unit Price:</p></td>
 				<td><input id="price"></td>
 			
-				<td><p>Hospital name:</p></td>
+				<td><p>Location :</p></td>
 				<td><input id="hospital"></td>
 			</tr>
 			<tr>
