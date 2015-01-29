@@ -6,18 +6,32 @@ $(document).ready(function() {
 });
 
 	$("#inventoryId").click(function() {
-	$("#inventoryId").css('color', 'black');
-	if ($("#inventoryId").val() == "Inventory Id can not be empty") {
-		$("#inventoryId").val("");
-	}
-});
+		$("#inventoryId").css('color', 'black');
+		if ($("#inventoryId").val() == "Inventory Id can not be empty") {
+			$("#inventoryId").val("");
+		}
+	});
 
 	$("#name").click(function() {
-	$("#name").css('color', 'black');
-	if ($("#name").val() == "Inventory Name can not be empty") {
-		$("#name").val("");
-	}
-});
+		$("#name").css('color', 'black');
+		if ($("#name").val() == "Inventory Name can not be empty") {
+			$("#name").val("");
+		}
+	});
+	
+	$("#pricePerUnit").click(function() {
+		$("#pricePerUnit").css('color', 'black');
+		if ($("#pricePerUnit").val() == "Please Enter valied price") {
+			$("#pricePerUnit").val("");
+		}
+	});
+	
+	$("#availableAmount").click(function() {
+		$("#availableAmount").css('color', 'black');
+		if ($("#availableAmount").val() == "Please Enter valied Amount") {
+			$("#availableAmount").val("");
+		}
+	});
 
 function goHome() {
 	window.location.replace("http://localhost:8080/GradleSpringMVC");
@@ -54,14 +68,25 @@ function validateAdd(data){
 		$("#inventoryId").css('color', 'red');
 		return false;
 	}
+	
 	if(data.name == null || data.name =="" || data.name.length==0 || data.name=="Inventory Name can not be empty"){
 		$("#name").val("Inventory Name can not be empty");
 		$("#name").css('color', 'red');
 		return false;
 	}
 	
-	return true;
+	if(!($.isNumeric(data.availableAmount))){
+		$("#availableAmount").val("Please Enter valied Amount");
+		$("#availableAmount").css('color', 'red');
+		return false;
+	}
 	
+	if (!($.isNumeric(data.pricePerUnit))){
+		$("#pricePerUnit").val("Please Enter valied price");
+		$("#pricePerUnit").css('color', 'red');
+		return false;
+	}
+	return true;
 }
 
 function doAdd() {
@@ -90,7 +115,8 @@ function doAdd() {
 function doClearAll() {
 	$("#inventoryId").val("");
 	$("#name").val("");
-	$("#price").val("");
-	$("#hospital").val("");
-	$("#userNote").val("");
+	$("#availableAmount").val("");
+	$("#pricePerUnit").val("");
+	$("#location").val("");
+	$("#description").val("");
 }
