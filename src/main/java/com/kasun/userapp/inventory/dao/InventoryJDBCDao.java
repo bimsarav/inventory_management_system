@@ -89,9 +89,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			if (!searchCriteria.getPricePerUnit().isEmpty()) {
 				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Price = " + searchCriteria.getPricePerUnit()+ " ";
+					sql = sql + "AND Price_Per_Unit = " + searchCriteria.getPricePerUnit()+ " ";
 				} else {
-					sql = sql + "Price = " + searchCriteria.getPricePerUnit() + " ";
+					sql = sql + "Price_Per_Unit = " + searchCriteria.getPricePerUnit() + " ";
 					isThereAnyVariableBefore = true;
 				}
 			}
@@ -99,9 +99,9 @@ public class InventoryJDBCDao implements InventoryDao {
 			if (!searchCriteria.getLocation().isEmpty()) {
 				
 				if (isThereAnyVariableBefore) {
-					sql = sql + "AND Hospital = '"+ searchCriteria.getLocation() + "' ";
+					sql = sql + "AND Location = '"+ searchCriteria.getLocation() + "' ";
 				} else {
-					sql = sql + "Hospital = '" + searchCriteria.getLocation()+ "' ";
+					sql = sql + "Location = '" + searchCriteria.getLocation()+ "' ";
 					isThereAnyVariableBefore = true;
 				}
 			}
@@ -168,6 +168,7 @@ public class InventoryJDBCDao implements InventoryDao {
 	private boolean isAllFieldsNotEmpty(Object obj) {
 
 		for (Field field : obj.getClass().getDeclaredFields()) {
+			
 			if (!field.isAccessible()) {
 				field.setAccessible(true);
 			}

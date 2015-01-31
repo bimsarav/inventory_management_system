@@ -16,14 +16,14 @@
 				<td><input id="inventoryId"></td>
 
 				<td><p>Inventory Name:</p></td>
-				<td><input id="name"></td>
+				<td><input id="inventoryName"></td>
 			</tr>
 			<tr>
 				<td><p>Unit Price:</p></td>
-				<td><input id="price"></td>
+				<td><input id="pricePerUnit"></td>
 			
 				<td><p>Location :</p></td>
-				<td><input id="hospital"></td>
+				<td><input id="location"></td>
 			</tr>
 			<tr>
 			</tr>
