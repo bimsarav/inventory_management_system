@@ -9,12 +9,11 @@ $(document).ready(
 		});
 
 function goHome() {
-	window.location.replace("http://localhost:8080/GradleSpringMVC");
+	window.location.replace("http://54.165.74.52:8080/GradleSpringMVC");
 }
 
 function viewAddInventory() {
-	window.location
-			.replace("http://localhost:8080/GradleSpringMVC/inventory/add_edit_view");
+	window.location.replace("http://54.165.74.52:8080/GradleSpringMVC/inventory/add_edit_view");
 }
 
 function createInventoryTable(data) {
@@ -147,8 +146,7 @@ function doSearch() {
 
 function doClearAll() {
 	$("#inventoryId").val("");
-	$("#name").val("");
-	$("#price").val("");
-	$("#hospital").val("");
-	$("#userNote").val("");
+	$("#inventoryName").val("");
+	$("#location").val("");
+	$("#pricePerUnit").val("");
 }

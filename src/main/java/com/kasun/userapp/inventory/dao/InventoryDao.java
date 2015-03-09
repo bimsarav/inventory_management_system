@@ -14,6 +14,8 @@ import com.kasun.userapp.inventory.model.Inventory;
  * Dec 21, 2014
  */
 public interface InventoryDao {
+	
+	Inventory loadInventoryById(String inventoryId);
 		
 	Void saveInventory(InventoryAddParam addParam);
 	

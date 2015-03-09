@@ -114,11 +114,13 @@ public class InventoryJDBCDao implements InventoryDao {
 			Inventory inventory = new Inventory();
 			inventory.setInventoryId((String) (row.get("Inventory_Id")));
 			inventory.setName((String) (row.get("Name")));
+			inventory.setAvailableAmount((Integer)(row.get("Available_Amount")));
+			inventory.setSoldAmount((Integer)(row.get("Sold")));
 			inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
 			inventory.setLocation((String) (row.get("Location")));
 			inventory.setDescription((String) (row.get("Description")));
 			inventory.setCreatedDate((Date) (row.get("Created_Date")));
-
+			inventory.setRestAmount();
 			searchResults.add(inventory);
 		}
 		return searchResults;
@@ -139,7 +141,6 @@ public class InventoryJDBCDao implements InventoryDao {
 			inventory.setName((String) (row.get("Name")));
 			inventory.setAvailableAmount((Integer)(row.get("Available_Amount")));
 			inventory.setSoldAmount((Integer)(row.get("Sold")));
-			inventory.setRestAmount();
 			inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
 			inventory.setLocation((String) (row.get("Location")));
 			inventory.setDescription((String) (row.get("Description")));
@@ -147,6 +148,31 @@ public class InventoryJDBCDao implements InventoryDao {
 			searchResults.add(inventory);
 		}
 		return searchResults;
+	}
+	
+	@Override
+	public Inventory loadInventoryById(String inventoryId) {
+		String sql = "SELECT * FROM inventoryData WHERE Inventory_Id = ?";
+//		Object resultSet = getJdbcTemplate().queryForList(sql, inventoryId);
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql, inventoryId);
+		Inventory inventory = null;
+		
+		if (rows != null) {
+			inventory = new Inventory();
+
+			for (@SuppressWarnings("rawtypes")
+			Map row : rows) {
+				inventory.setInventoryId((String) (row.get("Inventory_Id")));
+				inventory.setName((String) (row.get("Name")));
+				inventory.setAvailableAmount((Integer)(row.get("Available_Amount")));
+				inventory.setSoldAmount((Integer)(row.get("Sold")));
+				inventory.setPricePerUnit((Integer) (row.get("Price_Per_Unit")));
+				inventory.setLocation((String) (row.get("Location")));
+				inventory.setDescription((String) (row.get("Description")));
+				inventory.setCreatedDate((Date) (row.get("Created_Date")));
+			}
+		}
+		return inventory;
 	}
 
 	@Override

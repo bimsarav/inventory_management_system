@@ -22,11 +22,11 @@ function showInventories(){
 }
 
 function viewInventory() {
-    window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/welcome");
+    window.location.replace("http://54.165.74.52:8080/GradleSpringMVC/inventory/welcome");
 }
 
 function viewMakeReservation() {
-    window.location.replace("http://localhost:8080/GradleSpringMVC/reservation/makeReservation/welcome");
+    window.location.replace("http://54.165.74.52:8080/GradleSpringMVC/reservation/makeReservation/welcome");
 }
 
 function Tenant() {

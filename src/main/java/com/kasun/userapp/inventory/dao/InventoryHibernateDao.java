@@ -40,4 +40,10 @@ public class InventoryHibernateDao implements InventoryDao {
 		return null;
 	}
 
+	@Override
+	public Inventory loadInventoryById(String inventoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -8,6 +8,10 @@
 	
 	<!-- Logic -->
 	
+	<bean id = "loadReservationLogic" class="com.kasun.userapp.reservation.logic.LoadReservationLogic">
+		<property name="inventoryDao" ref="inventoryDao"/>
+	</bean>
+			
 	<bean id = "viewAllInventoriesLogic" class="com.kasun.userapp.inventory.logic.ViewAllInventoriesLogic">
 		<property name="inventoryDao" ref="inventoryDao"/>
 	</bean>
@@ -31,6 +35,10 @@
 		<property name="searchInventoryLogic" ref="searchInventoryLogic"/>
 		<property name="viewAllInventoriesLogic" ref="viewAllInventoriesLogic"/>
 		<property name="deleteInventoryLogic" ref="deleteInventoryLogic"/>
+	</bean>
+	
+	<bean id = "reservationService" class="com.kasun.userapp.reservation.service.ReservationServiceImpl">
+		<property name="loadReservationLogic" ref="loadReservationLogic"/>
 	</bean>
 	
 	<!-- Dao -->

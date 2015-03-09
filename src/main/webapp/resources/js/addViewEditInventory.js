@@ -34,11 +34,11 @@ $(document).ready(function() {
 	});
 
 function goHome() {
-	window.location.replace("http://localhost:8080/GradleSpringMVC");
+	window.location.replace("http://54.165.74.52:8080/GradleSpringMVC");
 }
 
 function goBack() {
-	window.location.replace("http://localhost:8080/GradleSpringMVC/inventory/welcome");
+	window.location.replace("http://54.165.74.52:8080/GradleSpringMVC/inventory/welcome");
 }
 
 function InventoryAddParam() {
