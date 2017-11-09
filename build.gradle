@@ -4,8 +4,8 @@ apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 
 // Uses JDK 7
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 war {
 	archiveName = projectName+'.war'
@@ -16,7 +16,7 @@ project.ext {
 	productName = 'SpringMVC'
 	moduleName = 'Undefined'
 	moduleType = 'Undefined'
-	deployDir = System.getenv()['deploy_in_tomcat'] + "/webapps"
+	deployDir = System.getenv()['TOMCAT_HOME'] + "/webapps"
 }
 
 // 1. Get dependencies from Maven local repository
@@ -36,7 +36,9 @@ dependencies {
 			'mysql:mysql-connector-java:' + mysqlJavaConnectorVersion,
 			'org.codehaus.jackson:jackson-mapper-asl:' + jacksonVersion,
 			'jstl:jstl:1.2'
-			
+
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 }
